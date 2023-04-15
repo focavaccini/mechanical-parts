@@ -94,17 +94,17 @@ public class NumericUtil {
         return value != null ? value : 0;
     }
 
-    public synchronized static Byte getNotNullOrZero(Byte value) {
-        return value != null ? value : new Byte("0");
-    }
+//    public synchronized static Byte getNotNullOrZero(Byte value) {
+//        return value != null ? value : new Byte("0");
+//    }
 
-    public synchronized static Long getNotNullOrZero(Long value) {
-        return value != null ? value : new Long("0");
-    }
+//    public synchronized static Long getNotNullOrZero(Long value) {
+//        return value != null ? value : new Long("0");
+//    }
 
-    public synchronized static Float getNotNullOrZero(Float value) {
-        return value != null ? value : new Float(0);
-    }
+//    public synchronized static Float getNotNullOrZero(Float value) {
+//        return value != null ? value : new Float(0);
+//    }
 
     public synchronized static Double getNotNullOrZero(Double value) {
         return value != null ? value : 0.0;
