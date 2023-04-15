@@ -5,7 +5,6 @@ import br.com.inventory.mechanicalparts.dtos.CarDTO;
 import br.com.inventory.mechanicalparts.entities.Car;
 import br.com.inventory.mechanicalparts.services.CarService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

@@ -1,13 +1,9 @@
 package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
-import br.com.inventory.mechanicalparts.dtos.ProductDTO;
 import br.com.inventory.mechanicalparts.entities.Product;
-import br.com.inventory.mechanicalparts.entities.ServicePerformed;
 import br.com.inventory.mechanicalparts.repositories.ProductRepository;
-import br.com.inventory.mechanicalparts.repositories.ServicePerformedRepository;
 import br.com.inventory.mechanicalparts.services.ProductService;
-import br.com.inventory.mechanicalparts.services.ServicePerformedService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -49,30 +45,6 @@ public class ProductServiceImpl implements ProductService {
         });
 
     }
-
-    //    @Override
-//    public ProductDTO convertToDTO(Product product) {
-//        ProductDTO productDTO = new ProductDTO();
-//
-//        productDTO.setValue(product.getValue());
-//        productDTO.setName(product.getName());
-//        productDTO.setQuantity(product.getQuantity());
-//        productDTO.setIdentifyCode(product.getIdentifyCode());
-//
-//        return productDTO;
-//    }
-//
-//    @Override
-//    public Product converterToEntity(ProductDTO productDTO) {
-//        Product product = new Product();
-//
-//        product.setValue(productDTO.getValue());
-//        product.setName(productDTO.getName());
-//        product.setQuantity(productDTO.getQuantity());
-//        product.setIdentifyCode(productDTO.getIdentifyCode());
-//
-//        return product;
-//    }
 
     @Override
     public JpaRepository<Product, Long> getRepository() {

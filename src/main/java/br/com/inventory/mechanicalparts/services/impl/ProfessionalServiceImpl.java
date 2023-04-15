@@ -31,28 +31,6 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         professionalRepository.save(professionalManaged);
     }
 
-//    @Override
-//    public ProfessionalDTO converterToDTO(Professional professional) {
-//        ProfessionalDTO professionalDTO = new ProfessionalDTO();
-//
-//        professionalDTO.setNome(professional.getName());
-//        professionalDTO.setEmail(professional.getEmail());
-//        professionalDTO.setPhone(professional.getPhone());
-//
-//        return professionalDTO;
-//    }
-//
-//    @Override
-//    public Professional converterToEntity(ProfessionalDTO professionalDTO) {
-//        Professional professional = new Professional();
-//
-//        professional.setName(professionalDTO.getNome());
-//        professional.setEmail(professionalDTO.getEmail());
-//        professional.setPhone(professionalDTO.getPhone());
-//
-//        return professional;
-//    }
-
     @Override
     public JpaRepository<Professional, Long> getRepository() {
         return this.professionalRepository;

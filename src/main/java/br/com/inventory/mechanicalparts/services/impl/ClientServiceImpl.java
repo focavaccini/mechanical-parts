@@ -1,16 +1,15 @@
 package br.com.inventory.mechanicalparts.services.impl;
 
 //import br.com.inventory.mechanicalparts.Util.Utils;
+
 import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.Utils.ValidateCPF;
-import br.com.inventory.mechanicalparts.dtos.ClientDTO;
-import br.com.inventory.mechanicalparts.entities.Address;
 import br.com.inventory.mechanicalparts.entities.Client;
+import br.com.inventory.mechanicalparts.repositories.ClientRepository;
 import br.com.inventory.mechanicalparts.services.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-import br.com.inventory.mechanicalparts.repositories.ClientRepository;
 
 @Service
 @AllArgsConstructor
@@ -64,45 +63,6 @@ public class ClientServiceImpl implements ClientService {
             System.out.println("Cpf já pertence a outra pessoa");
         }
     }
-
-//    private void checkIfTheCarAlreadyBelongsToSomeoneElse(Client client){
-//        Client clientManaged = clientRepository.findByEmail(client.getEmail());
-//        if(clientManaged != null && !clientManaged.equals(client)){
-//            System.out.println("E-mail já pertence a outra pessoa");
-//        }
-//    }
-
-
-//    @Override
-//    public void insertAddress(Address address) {
-//        Client client = clientRepository.findById(address.getClient().getId()).get();
-//        client.getAddresses().add(address);
-//    }
-
-//    @Override
-//    public ClientDTO converterToDTO(Client client) {
-//        ClientDTO clientDTO = new ClientDTO();
-//        clientDTO.setId(client.getId());
-//        clientDTO.setName(client.getName());
-//        clientDTO.setCpf(client.getCpf());
-//        clientDTO.setEmail(client.getEmail());
-//        clientDTO.setBirthdate(client.getBirthdate());
-//        clientDTO.setPhone(client.getPhone());
-//
-//        return clientDTO;
-//    }
-//
-//    @Override
-//    public Client converterToEntity(ClientDTO clientDTO) {
-//        Client client = new Client();
-//        client.setId(clientDTO.getId());
-//        client.setName(clientDTO.getName());
-//        client.setCpf(clientDTO.getCpf());
-//        client.setEmail(clientDTO.getEmail());
-//        client.setBirthdate(clientDTO.getBirthdate());
-//        client.setPhone(clientDTO.getPhone());
-//        return client;
-//    }
 
     @Override
     public Client buscarPorId(final Long idClient) {

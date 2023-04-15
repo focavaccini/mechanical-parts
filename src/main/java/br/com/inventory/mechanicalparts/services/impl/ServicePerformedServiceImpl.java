@@ -1,7 +1,6 @@
 package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
-import br.com.inventory.mechanicalparts.dtos.ServicePerformedDTO;
 import br.com.inventory.mechanicalparts.entities.ServicePerformed;
 import br.com.inventory.mechanicalparts.repositories.ServicePerformedRepository;
 import br.com.inventory.mechanicalparts.services.ProductService;
@@ -43,40 +42,6 @@ public class ServicePerformedServiceImpl implements ServicePerformedService {
 
         servicePerformedRepository.save(servicePerformedManaged);
     }
-
-//    @Override
-//    public ServicePerformedDTO converterToDTO(ServicePerformed servicePerformed) {
-//        ServicePerformedDTO servicePerformedDTO = new ServicePerformedDTO();
-//
-//        servicePerformedDTO.setDescription(servicePerformed.getDescription());
-//        servicePerformedDTO.setServiceDays(servicePerformed.getServiceDays());
-//        servicePerformedDTO.setObservation(servicePerformed.getObservation());
-//        servicePerformedDTO.setLaborCost(servicePerformed.getLaborCost());
-//        servicePerformedDTO.setTotalValue(servicePerformed.getTotalValue());
-//        servicePerformedDTO.setProblemReported(servicePerformed.getProblemReported());
-//        servicePerformedDTO.setDeliveryDate(servicePerformed.getDeliveryDate());
-//        servicePerformedDTO.setValue(servicePerformed.getValue());
-//        //servicePerformedDTO.setUsedProducts(servicePerformed.getUsedProducts());
-//
-//        return servicePerformedDTO;
-//    }
-//
-//    @Override
-//    public ServicePerformed converterToEntity(ServicePerformedDTO servicePerformedDTO) {
-//        ServicePerformed servicePerformed = new ServicePerformed();
-//
-//        servicePerformed.setDescription(servicePerformedDTO.getDescription());
-//        servicePerformed.setServiceDays(servicePerformedDTO.getServiceDays());
-//        servicePerformed.setObservation(servicePerformedDTO.getObservation());
-//        servicePerformed.setLaborCost(servicePerformedDTO.getLaborCost());
-//        servicePerformed.setTotalValue(servicePerformedDTO.getTotalValue());
-//        servicePerformed.setProblemReported(servicePerformedDTO.getProblemReported());
-//        servicePerformed.setDeliveryDate(servicePerformedDTO.getDeliveryDate());
-//        servicePerformed.setValue(servicePerformedDTO.getValue());
-//        //servicePerformed.setUsedProducts(servicePerformedDTO.getUsedProducts());
-//
-//        return servicePerformed;
-//    }
 
     @Override
     public JpaRepository<ServicePerformed, Long> getRepository() {

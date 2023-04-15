@@ -1,12 +1,8 @@
 package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
-import br.com.inventory.mechanicalparts.dtos.StateDTO;
-import br.com.inventory.mechanicalparts.entities.Address;
 import br.com.inventory.mechanicalparts.entities.State;
-import br.com.inventory.mechanicalparts.repositories.AddressRepository;
 import br.com.inventory.mechanicalparts.repositories.StateRepository;
-import br.com.inventory.mechanicalparts.services.AddressService;
 import br.com.inventory.mechanicalparts.services.StateService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -38,24 +34,6 @@ public class StateServiceImpl implements StateService {
 
         stateRepository.save(stateManaged);
     }
-
-//    @Override
-//    public StateDTO converterToDTO(State state){
-//        StateDTO stateDTO = new StateDTO();
-//        stateDTO.setId(state.getId());
-//        stateDTO.setName(state.getName());
-//
-//        return stateDTO;
-//    }
-//
-//    @Override
-//    public State converterToEntity(StateDTO stateDTO){
-//        State state = new State();
-//        state.setId(stateDTO.getId());
-//        state.setName(stateDTO.getName());
-//
-//        return state;
-//    }
 
     @Override
     public JpaRepository<State, Long> getRepository() {

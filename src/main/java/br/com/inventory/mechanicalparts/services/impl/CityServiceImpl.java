@@ -1,9 +1,7 @@
 package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
-import br.com.inventory.mechanicalparts.dtos.CityDTO;
 import br.com.inventory.mechanicalparts.entities.City;
-import br.com.inventory.mechanicalparts.entities.State;
 import br.com.inventory.mechanicalparts.repositories.CityRepository;
 import br.com.inventory.mechanicalparts.repositories.StateRepository;
 import br.com.inventory.mechanicalparts.services.CityService;
@@ -35,26 +33,6 @@ public class CityServiceImpl implements CityService {
 
         cityRepository.save(cityManaged);
     }
-
-//    @Override
-//    public CityDTO converterToDTO(City city) {
-//        CityDTO cityDTO = new CityDTO();
-//        cityDTO.setId(city.getId());
-//        cityDTO.setName(city.getName());
-//        cityDTO.setState(stateService.converterToDTO(city.getState()));
-//        return cityDTO;
-//    }
-//
-//    @Override
-//    public City converterToEntity(CityDTO cityDTO) {
-//        City city = new City();
-//        city.setId(cityDTO.getId());
-//        city.setName(cityDTO.getName());
-//
-//        State state = stateRepository.findById(cityDTO.getState().getId()).get();
-//        city.setState(state);
-//         return city;
-//    }
 
     @Override
     public JpaRepository<City, Long> getRepository() {

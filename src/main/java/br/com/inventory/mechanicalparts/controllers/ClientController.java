@@ -2,13 +2,12 @@ package br.com.inventory.mechanicalparts.controllers;
 
 import br.com.inventory.mechanicalparts.controllers.interfaces.IClientController;
 import br.com.inventory.mechanicalparts.dtos.ClientDTO;
-import br.com.inventory.mechanicalparts.services.ClientService;
-import br.com.inventory.mechanicalparts.services.impl.ClientServiceImpl;
 import br.com.inventory.mechanicalparts.entities.Client;
+import br.com.inventory.mechanicalparts.services.ClientService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor

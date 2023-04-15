@@ -5,9 +5,9 @@ import br.com.inventory.mechanicalparts.dtos.AddressDTO;
 import br.com.inventory.mechanicalparts.entities.Address;
 import br.com.inventory.mechanicalparts.services.AddressService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor

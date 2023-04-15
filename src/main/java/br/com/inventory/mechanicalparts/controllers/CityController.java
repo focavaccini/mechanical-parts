@@ -2,14 +2,12 @@ package br.com.inventory.mechanicalparts.controllers;
 
 import br.com.inventory.mechanicalparts.controllers.interfaces.ICityController;
 import br.com.inventory.mechanicalparts.dtos.CityDTO;
-import br.com.inventory.mechanicalparts.dtos.StateDTO;
 import br.com.inventory.mechanicalparts.entities.City;
-import br.com.inventory.mechanicalparts.entities.State;
 import br.com.inventory.mechanicalparts.services.CityService;
-import br.com.inventory.mechanicalparts.services.StateService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor

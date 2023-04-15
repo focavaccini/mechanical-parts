@@ -1,10 +1,7 @@
 package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
-import br.com.inventory.mechanicalparts.dtos.AddressDTO;
 import br.com.inventory.mechanicalparts.entities.Address;
-import br.com.inventory.mechanicalparts.entities.City;
-import br.com.inventory.mechanicalparts.entities.Client;
 import br.com.inventory.mechanicalparts.repositories.AddressRepository;
 import br.com.inventory.mechanicalparts.repositories.CityRepository;
 import br.com.inventory.mechanicalparts.repositories.ClientRepository;
@@ -12,7 +9,6 @@ import br.com.inventory.mechanicalparts.services.AddressService;
 import br.com.inventory.mechanicalparts.services.CityService;
 import br.com.inventory.mechanicalparts.services.ClientService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -54,36 +50,6 @@ public class AddressServiceImpl implements AddressService {
 
         addressRepository.save(addressManaged);
     }
-
-//    @Override
-//    public AddressDTO convertToDTO(Address address) {
-//        AddressDTO addressDTO = new AddressDTO();
-//        addressDTO.setId(address.getId());
-//        addressDTO.setStreet(address.getStreet());
-//        addressDTO.setNumber(address.getNumber());
-//        addressDTO.setNeighborhood(address.getNeighborhood());
-//        addressDTO.setComplement(address.getComplement());
-//        addressDTO.setCity(cityService.converterToDTO(address.getCity()));
-//        addressDTO.setClient(clientService.converterToDTO(address.getClient()));
-//        return addressDTO;
-//    }
-//
-//    @Override
-//    public Address convertToEntity(AddressDTO addressDTO) {
-//        Address address = new Address();
-//        address.setId(addressDTO.getId());
-//        address.setCep(addressDTO.getCep());
-//        address.setNeighborhood(addressDTO.getNeighborhood());
-//        address.setComplement(address.getComplement());
-//        address.setNumber(addressDTO.getNumber());
-//        address.setStreet(addressDTO.getStreet());
-//
-//        City city = cityRepository.findById(addressDTO.getCity().getId()).get();
-//        Client client = clientRepository.findById(addressDTO.getClient().getId()).get();
-//        address.setCity(city);
-//        address.setClient(client);
-//        return address;
-//    }
 
     @Override
     public JpaRepository<Address, Long> getRepository() {

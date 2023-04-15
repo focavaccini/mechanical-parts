@@ -5,7 +5,9 @@ import br.com.inventory.mechanicalparts.dtos.ProfessionalDTO;
 import br.com.inventory.mechanicalparts.entities.Professional;
 import br.com.inventory.mechanicalparts.services.ProfessionalService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
