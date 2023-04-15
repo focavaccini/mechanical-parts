@@ -1,7 +1,6 @@
 package br.com.inventory.mechanicalparts.controllers.interfaces;
 
 import br.com.inventory.mechanicalparts.dtos.StateDTO;
-import br.com.inventory.mechanicalparts.entities.State;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +11,7 @@ public interface IStateController {
     @PostMapping
     StateDTO insert(@RequestBody StateDTO stateDTO);
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{idState}")
     void update(@PathVariable Long idState, @RequestBody StateDTO stateDTO);
 
     @GetMapping

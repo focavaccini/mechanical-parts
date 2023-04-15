@@ -10,7 +10,7 @@ public enum EnumTypeFuel {
     private int code;
     private String description;
 
-    private EnumTypeFuel(int code, String description) {
+    EnumTypeFuel(int code, String description) {
         this.code = code;
         this.description = description;
     }

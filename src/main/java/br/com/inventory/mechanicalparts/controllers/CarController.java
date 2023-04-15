@@ -20,7 +20,7 @@ public class CarController extends AbstractController<CarService> implements ICa
         return convert(car, CarDTO.class);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{idCar}")
     public void update(@PathVariable Long idCar, @RequestBody CarDTO carDTO){
         Car car = convert(carDTO, Car.class);
         carService.update(idCar, car);

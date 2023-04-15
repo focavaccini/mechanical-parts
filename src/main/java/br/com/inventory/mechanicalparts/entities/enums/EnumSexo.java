@@ -8,7 +8,7 @@ public enum EnumSexo {
     private int code;
     private String description;
 
-    private EnumSexo(int code, String description) {
+    EnumSexo(int code, String description) {
         this.code = code;
         this.description = description;
     }

@@ -9,7 +9,7 @@ public interface ICarController {
     @PostMapping
     CarDTO insert(@RequestBody CarDTO carDTO);
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{idCar}")
     void update(@PathVariable Long idCar, @RequestBody CarDTO carDTO);
 
 }

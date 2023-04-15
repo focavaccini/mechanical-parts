@@ -9,6 +9,6 @@ public interface ICityController {
     @PostMapping
     CityDTO insert(@RequestBody CityDTO cityDTO);
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{idCity}")
     void update(@PathVariable Long idCity, @RequestBody CityDTO cityDTO);
 }

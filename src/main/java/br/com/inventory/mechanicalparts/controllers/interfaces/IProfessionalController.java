@@ -9,6 +9,6 @@ public interface IProfessionalController {
     @PostMapping
     ProfessionalDTO insert(@RequestBody ProfessionalDTO professionalDTO);
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{idProfessional}")
     void update(@PathVariable Long idProfessional, @RequestBody ProfessionalDTO professionalDTO);
 }

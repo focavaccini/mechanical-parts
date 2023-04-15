@@ -1,7 +1,6 @@
 package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
-import br.com.inventory.mechanicalparts.dtos.ProfessionalDTO;
 import br.com.inventory.mechanicalparts.entities.Professional;
 import br.com.inventory.mechanicalparts.repositories.ProfessionalRepository;
 import br.com.inventory.mechanicalparts.services.ProfessionalService;

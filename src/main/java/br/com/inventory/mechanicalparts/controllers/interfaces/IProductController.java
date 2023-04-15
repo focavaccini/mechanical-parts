@@ -9,6 +9,6 @@ public interface IProductController {
     @PostMapping
     ProductDTO insert(@RequestBody ProductDTO productDTO);
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{idProduct}")
     void update(@PathVariable Long idProduct, @RequestBody ProductDTO productDTO);
 }
