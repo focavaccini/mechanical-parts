@@ -6,9 +6,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
