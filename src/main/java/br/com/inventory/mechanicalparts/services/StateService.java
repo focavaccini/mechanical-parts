@@ -12,4 +12,6 @@ public interface StateService extends IAbstractService<State, Long> {
     State insert(State state);
 
     void update(Long idState, State state);
+
+    State getById(Long idState);
 }

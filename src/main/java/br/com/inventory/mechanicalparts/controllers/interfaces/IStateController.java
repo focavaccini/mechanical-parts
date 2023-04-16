@@ -16,4 +16,7 @@ public interface IStateController {
 
     @GetMapping
     List<StateDTO> getAllStates();
+
+    @GetMapping(value = "/{idState}")
+    StateDTO getById(@PathVariable Long idState);
 }

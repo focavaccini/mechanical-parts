@@ -2,6 +2,7 @@ package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.entities.State;
+import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.StateRepository;
 import br.com.inventory.mechanicalparts.services.StateService;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +21,13 @@ public class StateServiceImpl implements StateService {
     @Override
     public List<State> getAll() {
         return stateRepository.findAllByOrderByNameAsc();
+    }
+
+    @Override
+    public State getById(Long idState) {
+        Optional<State> state = stateRepository.findById(idState);
+
+        return state.orElseThrow(() -> new ObjectNotFound("Object not found! Id " + idState + ", Type: " + State.class.getName()));
     }
 
     @Override

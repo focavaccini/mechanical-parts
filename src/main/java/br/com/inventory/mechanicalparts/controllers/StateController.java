@@ -32,4 +32,9 @@ public class StateController extends AbstractController<StateService> implements
     public List<StateDTO> getAllStates() {
         return convert(stateService.getAll(), StateDTO.class);
     }
+
+    @Override
+    public StateDTO getById(Long idState) {
+        return convert(stateService.getById(idState), StateDTO.class);
+    }
 }
