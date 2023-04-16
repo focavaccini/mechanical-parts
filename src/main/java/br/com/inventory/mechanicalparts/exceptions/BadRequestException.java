@@ -14,8 +14,4 @@ public class BadRequestException extends RuntimeException{
 		super(msg, nullFields);
 	}
 
-	public BadRequestException(String message, List<String> nullFields) {
-		// TODO Auto-generated constructor stub
-	}
-
 }
