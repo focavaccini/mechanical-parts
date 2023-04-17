@@ -6,8 +6,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -28,9 +27,5 @@ public class ClientDTO implements Serializable {
 
     private EnumSexo sexo;
 
-    private Date birthdate;
-
-    private List<AddressDTO> addresses;
-
-    private List<CarDTO> cars;
+    private LocalDate birthdate;
 }

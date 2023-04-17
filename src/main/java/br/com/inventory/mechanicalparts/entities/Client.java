@@ -4,12 +4,11 @@ import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
 import br.com.inventory.mechanicalparts.entities.enums.EnumSexo;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -41,7 +40,8 @@ public class Client extends AbstractEntity<Long> implements Serializable {
     private String cpf;
 
     @Column(name = "birthdate")
-    private Date birthdate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate birthdate;
 
     @Column(name = "sexo")
     private EnumSexo sexo;
