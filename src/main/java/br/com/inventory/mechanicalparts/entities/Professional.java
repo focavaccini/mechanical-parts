@@ -39,9 +39,4 @@ public class Professional extends AbstractEntity<Long>  implements Serializable 
     @JsonIgnore
     private User user;
 
-//    @Transient
-//    private String login;
-//
-//    @Transient
-//    private String password;
 }

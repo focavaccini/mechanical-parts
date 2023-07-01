@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Setter
 public class ClientDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -30,7 +32,4 @@ public class ClientDTO implements Serializable {
     private LocalDate birthdate;
 
     private UserDTO userDTO;
-
-//
-//    private List<Car> cars;
 }

@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ import java.util.List;
 @Table(name = "tb_service_performed")
 public class ServicePerformed extends AbstractEntity<Long> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Column(name = "id")
@@ -45,9 +47,6 @@ public class ServicePerformed extends AbstractEntity<Long> implements Serializab
     @Column(name = "delivery_date")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate deliveryDate;
-
-//    @ManyToMany(mappedBy = "servicePerformed")
-//    private List<Product> usedProducts;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name="tb_service_performed_product",
@@ -75,7 +74,6 @@ public class ServicePerformed extends AbstractEntity<Long> implements Serializab
     @Column(name = "status_payment")
     private EnumStatusPayment statusPayment;
 
-//    @Column(name = "days_for_delivery")
     private Integer daysForDelivery;
 
 //    @PreUpdate

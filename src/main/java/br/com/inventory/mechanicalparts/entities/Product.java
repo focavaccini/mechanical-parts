@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 @Table(name = "tb_product")
 public class Product extends AbstractEntity<Long> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Column(name = "id")

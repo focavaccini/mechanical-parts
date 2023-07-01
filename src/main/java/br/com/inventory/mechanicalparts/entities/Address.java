@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 
 @Getter
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Table(name = "tb_address")
 public class Address extends AbstractEntity<Long> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Column(name = "id")

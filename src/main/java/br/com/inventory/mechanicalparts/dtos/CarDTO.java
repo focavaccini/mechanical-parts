@@ -4,6 +4,7 @@ import br.com.inventory.mechanicalparts.entities.enums.EnumTypeFuel;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @Setter
 public class CarDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private Long id;

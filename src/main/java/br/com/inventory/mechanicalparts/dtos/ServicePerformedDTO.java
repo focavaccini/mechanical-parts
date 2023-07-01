@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,11 +17,10 @@ import java.util.List;
 @Setter
 public class ServicePerformedDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
-    //private BigDecimal value;
 
     private String description;
 
@@ -65,8 +65,4 @@ public class ServicePerformedDTO implements Serializable {
             this.status = EnumStatusServicePerformed.EM_DIA;
         }
     }
-
-//    public void setDaysForDelivery() {
-//        this.daysForDelivery = deliveryDate.compareTo(LocalDate.from(Instant.now()));
-//    }
 }

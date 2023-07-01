@@ -3,6 +3,7 @@ package br.com.inventory.mechanicalparts.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 @Setter
 public class ProductDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private Long id;

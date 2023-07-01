@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 @Table(name = "tb_car")
 public class Car extends AbstractEntity<Long> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Column(name = "id")

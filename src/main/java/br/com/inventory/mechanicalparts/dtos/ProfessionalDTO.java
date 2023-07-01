@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Setter
 public class ProfessionalDTO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -30,13 +32,9 @@ public class ProfessionalDTO implements Serializable {
     @JsonIgnore
     private List<ServicePerformed> servicePerformed;
 
-//    @JsonIgnore
-//    private String login;
-//
     @Transient
     private String password;
 
-//    @JsonIgnoreProperties({"id","password","username", "authorities.authority"})
     private UserLogin user;
 
 }
