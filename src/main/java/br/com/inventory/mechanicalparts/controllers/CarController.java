@@ -7,6 +7,8 @@ import br.com.inventory.mechanicalparts.services.CarService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class CarController extends AbstractController<CarService> implements ICarController {
@@ -26,5 +28,13 @@ public class CarController extends AbstractController<CarService> implements ICa
         carService.update(idCar, car);
     }
 
+    @Override
+    public List<CarDTO> getAll() {
+        return convert(carService.getAll(), CarDTO.class);
+    }
 
+    @Override
+    public CarDTO getById(Long idCar) {
+        return convert(carService.getById(idCar), CarDTO.class);
+    }
 }

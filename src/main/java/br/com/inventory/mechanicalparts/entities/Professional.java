@@ -1,6 +1,7 @@
 package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,6 +31,17 @@ public class Professional extends AbstractEntity<Long>  implements Serializable 
     @Column(name = "email", unique = true)
     private String email;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "professional")
     private List<ServicePerformed> servicePerformed;
+
+    @OneToOne
+    @JsonIgnore
+    private User user;
+
+//    @Transient
+//    private String login;
+//
+//    @Transient
+//    private String password;
 }

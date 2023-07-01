@@ -1,14 +1,15 @@
 package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.inventory.mechanicalparts.entities.enums.EnumTypeFuel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -36,7 +37,8 @@ public class Car extends AbstractEntity<Long> implements Serializable {
     private EnumTypeFuel fuel;
 
     @Column(name = "year_of_manufacture")
-    private Date yearOfManufacture;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate yearOfManufacture;
 
     @JsonIgnore
     @ManyToOne

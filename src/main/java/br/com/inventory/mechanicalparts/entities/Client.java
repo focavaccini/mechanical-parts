@@ -48,4 +48,7 @@ public class Client extends AbstractEntity<Long> implements Serializable {
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Car> cars;
+
+    @OneToOne
+    private User user;
 }

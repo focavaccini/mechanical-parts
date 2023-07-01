@@ -17,10 +17,6 @@ import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Stream;
 
-/**
- * @author Jakson Wilson Bonfim de Lima
- */
-
 public class ClassUtil {
 
     private static final Map<Class, Class> CLASSES = new HashMap<>();

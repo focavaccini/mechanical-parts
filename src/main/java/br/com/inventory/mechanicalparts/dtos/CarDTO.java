@@ -1,12 +1,11 @@
 package br.com.inventory.mechanicalparts.dtos;
 
 import br.com.inventory.mechanicalparts.entities.enums.EnumTypeFuel;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -24,8 +23,7 @@ public class CarDTO implements Serializable {
 
     private EnumTypeFuel fuel;
 
-    private Date yearOfManufacture;
+    private LocalDate yearOfManufacture;
 
-    @JsonIgnore
     private ClientDTO client;
 }

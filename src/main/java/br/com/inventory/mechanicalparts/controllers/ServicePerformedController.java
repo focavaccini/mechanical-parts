@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class ServicePerformedController extends AbstractController<ServicePerformedService> implements IServicePerformedController {
@@ -24,5 +26,15 @@ public class ServicePerformedController extends AbstractController<ServicePerfor
     public void update(@PathVariable Long idServicePerformed, @RequestBody ServicePerformedDTO servicePerformedDTO){
         ServicePerformed servicePerformed = convert(servicePerformedDTO, ServicePerformed.class);
         servicePerformedService.update(idServicePerformed, servicePerformed);
+    }
+
+    @Override
+    public List<ServicePerformedDTO> getAll() {
+        return convert(servicePerformedService.getAll(), ServicePerformedDTO.class);
+    }
+
+    @Override
+    public ServicePerformedDTO getById(Long idServicePerformed) {
+        return convert(servicePerformedService.getById(idServicePerformed), ServicePerformedDTO.class);
     }
 }

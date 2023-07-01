@@ -1,7 +1,5 @@
 package br.com.inventory.mechanicalparts.Utils;
 
-//package com.smartbr.clinica.utils;
-
 import java.math.BigDecimal;
 
 public class NumericUtil {

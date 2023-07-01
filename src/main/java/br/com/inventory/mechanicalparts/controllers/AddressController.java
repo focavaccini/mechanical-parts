@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class AddressController extends AbstractController<AddressService> implements IAddressController {
@@ -24,5 +26,15 @@ public class AddressController extends AbstractController<AddressService> implem
     public void update(@PathVariable Long idAddress, @RequestBody AddressDTO addressDTO){
         Address address = convert(addressDTO, Address.class);
         addressService.update(idAddress, address);
+    }
+
+    @Override
+    public List<AddressDTO> getAll() {
+        return convert(addressService.getAll(), AddressDTO.class);
+    }
+
+    @Override
+    public AddressDTO getById(Long idAddress) {
+        return convert(addressService.getById(idAddress), AddressDTO.class);
     }
 }

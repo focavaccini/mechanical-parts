@@ -1,6 +1,7 @@
 package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,8 +26,8 @@ public class Product extends AbstractEntity<Long> implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "usedQuantity")
-    private Integer usedQuantity;
+    @Transient
+    private Integer quantityUsed;
 
     @Column(name = "totalQuantity")
     private Integer totalQuantity;
@@ -37,9 +38,12 @@ public class Product extends AbstractEntity<Long> implements Serializable {
     @Column(name = "identify_code", unique = true)
     private String identifyCode;
 
-    @ManyToMany
-    @JoinTable(name="tb_product_service_performed", joinColumns=
-            {@JoinColumn(name="product_id")}, inverseJoinColumns=
-            {@JoinColumn(name="service_performe_id")})
+    @JsonIgnore
+    @ManyToMany(mappedBy = "usedProducts", cascade = CascadeType.ALL)
     private List<ServicePerformed> servicePerformed;
+//    @ManyToMany
+//    @JoinTable(name="tb_product_service_performed", joinColumns=
+//            {@JoinColumn(name="product_id")}, inverseJoinColumns=
+//            {@JoinColumn(name="service_performe_id")})
+//    private List<ServicePerformed> servicePerformed;
 }

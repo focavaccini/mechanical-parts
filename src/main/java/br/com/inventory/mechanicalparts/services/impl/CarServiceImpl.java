@@ -3,6 +3,7 @@ package br.com.inventory.mechanicalparts.services.impl;
 import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.entities.Car;
 import br.com.inventory.mechanicalparts.entities.Client;
+import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.CarRepository;
 import br.com.inventory.mechanicalparts.repositories.ClientRepository;
 import br.com.inventory.mechanicalparts.services.CarService;
@@ -10,6 +11,9 @@ import br.com.inventory.mechanicalparts.services.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -23,9 +27,12 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car insert(Car car) {
+
+        Client client = clientService.getById(car.getClient().getId());
+        car.setClient(client);
         carRepository.save(car);
-        Client client = clientService.buscarPorId(1L);
         client.getCars().add(car);
+        clientRepository.save(client);
         return car;
     }
 
@@ -37,9 +44,20 @@ public class CarServiceImpl implements CarService {
         carManaged.setColor(Util.nvl(car.getColor(), carManaged.getColor()));
         carManaged.setYearOfManufacture(Util.nvl(car.getYearOfManufacture(), carManaged.getYearOfManufacture()));
         carManaged.setLicensePlate(Util.nvl(car.getLicensePlate(), carManaged.getLicensePlate()));
-        carManaged.setClient(Util.nvl(clientRepository.findById(car.getClient().getId()).get(), carManaged.getClient()));
+        carManaged.setClient(Util.nvl(clientRepository.findById(car.getClient().getId()), carManaged.getClient()));
 
         carRepository.save(carManaged);
+    }
+
+    @Override
+    public List<Car> getAll() {
+        return carRepository.findAll();
+    }
+
+    @Override
+    public Car getById(Long idCar) {
+        Optional<Car> car = carRepository.findById(idCar);
+        return car.orElseThrow(() -> new ObjectNotFound("Object not found! Id " + idCar + ", Type: " + Car.class.getName()));
     }
 
     @Override

@@ -16,11 +16,11 @@ public class ProductDTO implements Serializable {
 
     private String name;
 
-    private Integer quantityUsed;
-
     private Integer quantityTotal;
 
     private BigDecimal value;
 
     private String identifyCode;
+
+    private Integer quantityUsed;
 }

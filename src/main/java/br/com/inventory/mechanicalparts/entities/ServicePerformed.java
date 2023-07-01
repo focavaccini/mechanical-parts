@@ -1,13 +1,17 @@
 package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
+import br.com.inventory.mechanicalparts.entities.enums.EnumStatusPayment;
+import br.com.inventory.mechanicalparts.entities.enums.EnumStatusServicePerformed;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -23,8 +27,8 @@ public class ServicePerformed extends AbstractEntity<Long> implements Serializab
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_service_performed")
     private Long id;
 
-    @Column(name = "value")
-    private BigDecimal value;
+//    @Column(name = "value")
+//    private BigDecimal value;
 
     @Column(name = "description")
     private String description;
@@ -39,9 +43,16 @@ public class ServicePerformed extends AbstractEntity<Long> implements Serializab
     private Integer serviceDays;
 
     @Column(name = "delivery_date")
-    private Date deliveryDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate deliveryDate;
 
-    @ManyToMany(mappedBy = "servicePerformed")
+//    @ManyToMany(mappedBy = "servicePerformed")
+//    private List<Product> usedProducts;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name="tb_service_performed_product",
+            joinColumns= {@JoinColumn(name="service_performe_id")},
+            inverseJoinColumns= {@JoinColumn(name="product_id")})
     private List<Product> usedProducts;
 
     @Column(name = "labor_cost")
@@ -50,10 +61,44 @@ public class ServicePerformed extends AbstractEntity<Long> implements Serializab
     @Column(name = "total_value")
     private BigDecimal totalValue;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "professional_id")
     private Professional professional;
 
+    @Column(name = "status_service")
+    private EnumStatusServicePerformed status;
+
     @OneToOne
     private Car car;
+
+    @Column(name = "status_payment")
+    private EnumStatusPayment statusPayment;
+
+//    @Column(name = "days_for_delivery")
+    private Integer daysForDelivery;
+
+//    @PreUpdate
+//    private void preUpdate() {
+//        int days = this.deliveryDate.compareTo(LocalDate.now());
+//        if(days < 0){
+//            this.status = EnumStatusServicePerformed.ATRASADO;
+//        }else{
+//            this.status = EnumStatusServicePerformed.EM_DIA;
+//        }
+//    }
+//
+//    @PrePersist
+//    private void prePersist() {
+//        int days = this.deliveryDate.compareTo(LocalDate.now());
+//        if(days < 0){
+//            this.status = EnumStatusServicePerformed.ATRASADO;
+//        }else{
+//            this.status = EnumStatusServicePerformed.EM_DIA;
+//        }
+//    }
+
+//    public void setDaysForDelivery() {
+//        this.daysForDelivery = deliveryDate.compareTo(LocalDate.from(Instant.now()));
+//    }
 }

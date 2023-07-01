@@ -1,14 +1,14 @@
 package br.com.inventory.mechanicalparts.entities.enums;
 
-public enum EnumSexo {
+public enum EnumStatusPayment {
 
-    MASCULINO(1, "MASCULINO"),
-    FEMININO(2, "FEMININO"),
-    OUTROS(3, "OUTROS");
+    PENDENTE(1, "PENDENTE"),
+    PAGO(2, "PAGO"),
+    ATRASADO(3, "ATRASADO");
     private int code;
     private String description;
 
-    EnumSexo(int code, String description) {
+    EnumStatusPayment(int code, String description) {
         this.code = code;
         this.description = description;
     }
@@ -20,12 +20,12 @@ public enum EnumSexo {
     public String getDescription() {
         return description;
     }
-    public static EnumSexo toEnum(Integer code) {
+    public static EnumStatusPayment toEnum(Integer code) {
         if(code == null) {
             return null;
         }
 
-        for(EnumSexo x : EnumSexo.values()) {
+        for(EnumStatusPayment x : EnumStatusPayment.values()) {
             if(code.equals(x.getCode())) {
                 return x;
             }

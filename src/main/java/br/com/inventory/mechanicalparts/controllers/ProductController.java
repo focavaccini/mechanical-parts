@@ -7,6 +7,8 @@ import br.com.inventory.mechanicalparts.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class ProductController extends AbstractController<ProductService> implements IProductController {
@@ -24,5 +26,15 @@ public class ProductController extends AbstractController<ProductService> implem
     public void update(Long idProduct, ProductDTO productDTO) {
         Product product = convert(productDTO, Product.class);
         productService.update(idProduct, product);
+    }
+
+    @Override
+    public List<ProductDTO> getAll() {
+        return convert(productService.getAll(), ProductDTO.class);
+    }
+
+    @Override
+    public ProductDTO getById(Long idProduct) {
+        return convert(productService.getById(idProduct), ProductDTO.class);
     }
 }

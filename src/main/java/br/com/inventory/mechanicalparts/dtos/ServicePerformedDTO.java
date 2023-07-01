@@ -1,13 +1,15 @@
 package br.com.inventory.mechanicalparts.dtos;
 
 import br.com.inventory.mechanicalparts.entities.Professional;
+import br.com.inventory.mechanicalparts.entities.enums.EnumStatusServicePerformed;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -18,7 +20,7 @@ public class ServicePerformedDTO implements Serializable {
 
     private Long id;
 
-    private BigDecimal value;
+    //private BigDecimal value;
 
     private String description;
 
@@ -28,7 +30,7 @@ public class ServicePerformedDTO implements Serializable {
 
     private Integer serviceDays;
 
-    private Date deliveryDate;
+    private LocalDate deliveryDate;
 
     private List<ProductDTO> usedProducts;
 
@@ -42,7 +44,29 @@ public class ServicePerformedDTO implements Serializable {
 
     private Integer daysForDelivery;
 
-    public void setDaysForDelivery() {
-        this.daysForDelivery = deliveryDate.compareTo(Date.from(Instant.now()));
+    private EnumStatusServicePerformed status;
+
+    @PreUpdate
+    private void preUpdate() {
+        int days = this.deliveryDate.compareTo(LocalDate.now());
+        if(days < 0){
+            this.status = EnumStatusServicePerformed.ATRASADO;
+        }else{
+            this.status = EnumStatusServicePerformed.EM_DIA;
+        }
     }
+
+    @PrePersist
+    private void prePersist() {
+        int days = this.deliveryDate.compareTo(LocalDate.now());
+        if(days < 0){
+            this.status = EnumStatusServicePerformed.ATRASADO;
+        }else{
+            this.status = EnumStatusServicePerformed.EM_DIA;
+        }
+    }
+
+//    public void setDaysForDelivery() {
+//        this.daysForDelivery = deliveryDate.compareTo(LocalDate.from(Instant.now()));
+//    }
 }

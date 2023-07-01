@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class ClientController extends AbstractController<ClientService> implements IClientController {
@@ -26,8 +28,13 @@ public class ClientController extends AbstractController<ClientService> implemen
         clientService.update(idClient, client);
     }
 
-    public ClientDTO buscarPorId(@PathVariable("id") Long idClient){
-        return convert(clientService.buscarPorId(idClient), ClientDTO.class);
+    public ClientDTO getById(Long idClient){
+        return convert(clientService.getById(idClient), ClientDTO.class);
+    }
+
+    @Override
+    public List<ClientDTO> getAll() {
+        return convert(clientService.getAll(), ClientDTO.class);
     }
 
 }

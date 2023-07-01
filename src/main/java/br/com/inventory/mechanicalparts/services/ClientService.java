@@ -1,7 +1,10 @@
 package br.com.inventory.mechanicalparts.services;
 
 import br.com.inventory.mechanicalparts.controllers.interfaces.IAbstractService;
+import br.com.inventory.mechanicalparts.entities.Address;
 import br.com.inventory.mechanicalparts.entities.Client;
+
+import java.util.List;
 
 public interface ClientService extends IAbstractService<Client, Long> {
 
@@ -9,11 +12,9 @@ public interface ClientService extends IAbstractService<Client, Long> {
 
     void update(Long idClient, Client client);
 
-//   ClientDTO converterToDTO(Client client);
-//
-//    Client converterToEntity(ClientDTO clientDTO);
+    Client getById(Long idClient);
 
-    Client buscarPorId(Long idClient);
+    List<Client> getAll();
 
-    //void insertAddress(Address address);
+    List<Address> insertAddress(Address address);
 }

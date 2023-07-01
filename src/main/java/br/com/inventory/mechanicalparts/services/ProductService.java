@@ -11,5 +11,9 @@ public interface ProductService extends IAbstractService<Product, Long> {
 
     void update(Long idProduct, Product product);
 
-    void updateQuantity(List<Product> usedProducts);
+    Product updateQuantity(Product product, Integer usedQuantity);
+
+    Product getById(Long idProduct);
+
+    List<Product> getAll();
 }
