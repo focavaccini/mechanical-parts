@@ -32,6 +32,7 @@ public class Configurations {
                 .antMatchers(HttpMethod.POST, "/authentication/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/client").permitAll()
                 .antMatchers(HttpMethod.POST, "/professional").permitAll()
+                .antMatchers(HttpMethod.GET, "/professional").permitAll()
                 .antMatchers(HttpMethod.POST, "/state").permitAll()
                 .antMatchers(HttpMethod.POST, "/city").permitAll()
                 .anyRequest().authenticated()
