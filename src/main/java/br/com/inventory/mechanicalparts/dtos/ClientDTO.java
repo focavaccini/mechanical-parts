@@ -30,6 +30,4 @@ public class ClientDTO implements Serializable {
     private EnumSexo sexo;
 
     private LocalDate birthdate;
-
-    private UserDTO userDTO;
 }

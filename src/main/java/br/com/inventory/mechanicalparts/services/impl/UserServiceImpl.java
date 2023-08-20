@@ -8,9 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -20,14 +17,33 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public void saveUser(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    public User saveUser(String emailUser) {
+        User user = new User();
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        user.setPassword(generatePassword(emailUser));
+        user.setLogin(emailUser);
+        return userRepository.save(user);
 //        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
 //        byte messageDigest[] = algorithm.digest(user.getPassword().getBytes("UTF-8"));
 //
 //        System.out.println(messageDigest);
+    }
+
+    @Override
+    public void updateChangePassword(String login, String password, String newPassword) {
+        User newUser = findByPassword(password);
+        newUser.setPassword(generatePassword(newPassword));
+        userRepository.save(newUser);
+    }
+
+    @Override
+    public String generatePassword(String secretKey) {
+        return passwordEncoder.encode(secretKey);
+    }
+
+    @Override
+    public User findByPassword(String token) {
+        return userRepository.findByPassword(token);
     }
 
     @Override

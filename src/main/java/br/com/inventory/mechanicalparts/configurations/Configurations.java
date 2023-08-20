@@ -35,7 +35,8 @@ public class Configurations {
                 .antMatchers(HttpMethod.GET, "/professional").permitAll()
                 .antMatchers(HttpMethod.POST, "/state").permitAll()
                 .antMatchers(HttpMethod.POST, "/city").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers(HttpMethod.PUT, "/user").permitAll()
+//                .anyRequest().authenticated()
                 .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

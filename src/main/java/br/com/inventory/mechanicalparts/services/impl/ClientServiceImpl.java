@@ -4,6 +4,7 @@ import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.Utils.ValidateCPF;
 import br.com.inventory.mechanicalparts.entities.Address;
 import br.com.inventory.mechanicalparts.entities.Client;
+import br.com.inventory.mechanicalparts.entities.User;
 import br.com.inventory.mechanicalparts.exceptions.BadRequestException;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.ClientRepository;
@@ -13,8 +14,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,15 +30,9 @@ public class ClientServiceImpl implements ClientService {
     public Client insert(Client client) {
         Client newClient;
         onPrepareInsertOrUpdate(client);
+        User user = userService.saveUser(client.getEmail());
+        client.setUser(user);
         newClient = clientRepository.save(client);
-
-        try {
-            userService.saveUser(client.getUser());
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
 
         return newClient;
     }

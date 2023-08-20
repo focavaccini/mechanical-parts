@@ -2,6 +2,7 @@ package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.entities.Professional;
+import br.com.inventory.mechanicalparts.entities.User;
 import br.com.inventory.mechanicalparts.exceptions.BadRequestException;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.ProfessionalRepository;
@@ -11,8 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
+import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,20 +24,22 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
     private UserService userService;
 
+    private EmailService emailService;
+
     @Override
     public Professional insert(Professional professional) {
         Professional newProfessional = new Professional();
 
+        User user = userService.saveUser(professional.getEmail());
+        professional.setUser(user);
+        newProfessional = professionalRepository.save(professional);
 
         try {
-            userService.saveUser(professional.getUser());
-
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
+            emailService.sendMailToClient("Olá " + professional.getName(), newProfessional.getEmail(), emailService.getContentMail(newProfessional.getName(), user.getPassword(), "https://stackoverflow.com/questions/52483260/validate-phone-number-with-yup"));
+        } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-        newProfessional = professionalRepository.save(professional);
+
         return newProfessional;
     }
 

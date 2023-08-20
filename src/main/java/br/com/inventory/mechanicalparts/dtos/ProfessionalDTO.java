@@ -1,7 +1,6 @@
 package br.com.inventory.mechanicalparts.dtos;
 
 import br.com.inventory.mechanicalparts.entities.ServicePerformed;
-import br.com.inventory.mechanicalparts.entities.UserLogin;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,10 +30,4 @@ public class ProfessionalDTO implements Serializable {
 
     @JsonIgnore
     private List<ServicePerformed> servicePerformed;
-
-    @Transient
-    private String password;
-
-    private UserLogin user;
-
 }
