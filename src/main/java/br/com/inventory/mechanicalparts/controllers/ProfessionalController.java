@@ -1,6 +1,5 @@
 package br.com.inventory.mechanicalparts.controllers;
 
-
 import br.com.inventory.mechanicalparts.controllers.interfaces.IProfessionalController;
 import br.com.inventory.mechanicalparts.dtos.ProfessionalDTO;
 import br.com.inventory.mechanicalparts.entities.Professional;
@@ -20,7 +19,6 @@ public class ProfessionalController extends AbstractController<ProfessionalServi
 
     public Professional insert(@RequestBody ProfessionalDTO professionalDTO){
         Professional professional = convert(professionalDTO, Professional.class);
-//        professional = professionalService.insert(professional);
         return professionalService.insert(professional);
     }
 

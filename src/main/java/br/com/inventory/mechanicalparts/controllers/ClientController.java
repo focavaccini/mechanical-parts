@@ -19,8 +19,7 @@ public class ClientController extends AbstractController<ClientService> implemen
 
     public ClientDTO insert(@RequestBody ClientDTO clientDTO){
         Client client = convert(clientDTO, Client.class);
-        clientService.insert(client);
-        return convert(client, ClientDTO.class);
+        return convert(clientService.insert(client), ClientDTO.class);
     }
 
     public void update(@PathVariable Long idClient, @RequestBody ClientDTO clientDTO){

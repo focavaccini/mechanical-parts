@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,8 @@ public class ClientServiceImpl implements ClientService {
 
     private UserService userService;
 
+    private EmailService emailService;
+
     @Override
     public Client insert(Client client) {
         Client newClient;
@@ -33,6 +36,12 @@ public class ClientServiceImpl implements ClientService {
         User user = userService.saveUser(client.getEmail());
         client.setUser(user);
         newClient = clientRepository.save(client);
+
+        try {
+            emailService.sendMailToClient("Olá " + client.getName(), client.getEmail(), emailService.getContentMail(newClient.getName(), user.getPassword(), "https://stackoverflow.com/questions/52483260/validate-phone-number-with-yup"));
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
 
         return newClient;
     }
