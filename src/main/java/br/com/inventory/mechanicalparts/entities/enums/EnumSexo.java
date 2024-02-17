@@ -2,35 +2,22 @@ package br.com.inventory.mechanicalparts.entities.enums;
 
 public enum EnumSexo {
 
-    MASCULINO(1, "MASCULINO"),
-    FEMININO(2, "FEMININO"),
-    OUTROS(3, "OUTROS");
-    private int code;
+    MASCULINO("MASCULINO", "MASCULINO"),
+    FEMININO("FEMININO", "FEMININO"),
+    OUTROS("OUTROS", "OUTROS");
+    private String code;
     private String description;
 
-    EnumSexo(int code, String description) {
+    EnumSexo(String code, String description) {
         this.code = code;
         this.description = description;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
     public String getDescription() {
         return description;
-    }
-    public static EnumSexo toEnum(Integer code) {
-        if(code == null) {
-            return null;
-        }
-
-        for(EnumSexo x : EnumSexo.values()) {
-            if(code.equals(x.getCode())) {
-                return x;
-            }
-        }
-
-        throw new IllegalArgumentException("Invalid id " + code);
     }
 }
