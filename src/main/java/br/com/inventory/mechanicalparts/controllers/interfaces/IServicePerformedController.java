@@ -1,5 +1,6 @@
 package br.com.inventory.mechanicalparts.controllers.interfaces;
 
+import br.com.inventory.mechanicalparts.dtos.PaymentDTO;
 import br.com.inventory.mechanicalparts.dtos.ServicePerformedDTO;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,4 +20,7 @@ public interface IServicePerformedController {
 
     @GetMapping(value = "/{idServicePerformed}")
     ServicePerformedDTO getById(@PathVariable("idServicePerformed") Long idServicePerformed);
+
+    @PostMapping(value = "/pay-service/{idServicePerformed}")
+    void insertPayment(@PathVariable Long idServicePerformed, @RequestBody PaymentDTO paymentDTO);
 }

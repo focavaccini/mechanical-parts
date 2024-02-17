@@ -1,14 +1,15 @@
 package br.com.inventory.mechanicalparts.entities.enums;
 
-public enum EnumStatusPayment {
+public enum EnumPaymentForm {
 
-    PENDENTE("PENDENTE", "PENDENTE"),
-    PAGO("PAGO", "PAGO"),
-    ATRASADO("ATRASADO", "ATRASADO");
+    DINHEIRO("DINHEIRO", "DINHEIRO"),
+    CARTAO("CARTAO", "CARTAO"),
+    PIX("PIX", "PIX"),
+    CHEQUE("CHEQUE", "CHEQUE");
     private String code;
     private String description;
 
-    EnumStatusPayment(String code, String description) {
+    EnumPaymentForm(String code, String description) {
         this.code = code;
         this.description = description;
     }
@@ -20,4 +21,5 @@ public enum EnumStatusPayment {
     public String getDescription() {
         return description;
     }
+
 }
