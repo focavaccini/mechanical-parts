@@ -11,6 +11,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -45,6 +46,10 @@ public class ServicePerformedDTO implements Serializable {
     private Integer daysForDelivery;
 
     private EnumStatusServicePerformed status;
+
+    private LocalDateTime registrationDate;
+
+    private LocalDateTime updateDate;
 
     @PreUpdate
     private void preUpdate() {

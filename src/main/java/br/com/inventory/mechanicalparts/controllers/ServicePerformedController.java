@@ -1,7 +1,9 @@
 package br.com.inventory.mechanicalparts.controllers;
 
 import br.com.inventory.mechanicalparts.controllers.interfaces.IServicePerformedController;
+import br.com.inventory.mechanicalparts.dtos.PaymentDTO;
 import br.com.inventory.mechanicalparts.dtos.ServicePerformedDTO;
+import br.com.inventory.mechanicalparts.entities.*;
 import br.com.inventory.mechanicalparts.entities.ServicePerformed;
 import br.com.inventory.mechanicalparts.services.ServicePerformedService;
 import lombok.AllArgsConstructor;
@@ -36,5 +38,10 @@ public class ServicePerformedController extends AbstractController<ServicePerfor
     @Override
     public ServicePerformedDTO getById(Long idServicePerformed) {
         return convert(servicePerformedService.getById(idServicePerformed), ServicePerformedDTO.class);
+    }
+
+    public void insertPayment(@PathVariable Long idServicePerformed, @RequestBody  PaymentDTO paymentDTO) {
+        Payment payment = convert(paymentDTO, Payment.class);
+        servicePerformedService.insertPayment(idServicePerformed, payment);
     }
 }

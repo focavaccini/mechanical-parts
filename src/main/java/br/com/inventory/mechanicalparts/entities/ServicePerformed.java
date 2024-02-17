@@ -13,6 +13,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -75,6 +76,15 @@ public class ServicePerformed extends AbstractEntity<Long> implements Serializab
     private EnumStatusPayment statusPayment;
 
     private Integer daysForDelivery;
+
+    @Column(name = "registration_date")
+    private LocalDateTime registrationDate;
+
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
+
+    @OneToOne
+    private Payment payment;
 
 //    @PreUpdate
 //    private void preUpdate() {
