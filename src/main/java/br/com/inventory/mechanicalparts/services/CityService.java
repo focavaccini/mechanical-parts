@@ -14,4 +14,6 @@ public interface CityService extends IAbstractService<City, Long> {
     List<City> getAll();
 
     City getById(Long idCity);
+
+    List<City> findAllByState(String nameState);
 }

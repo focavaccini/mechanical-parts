@@ -2,6 +2,7 @@ package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.entities.City;
+import br.com.inventory.mechanicalparts.entities.State;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.CityRepository;
 import br.com.inventory.mechanicalparts.repositories.StateRepository;
@@ -47,6 +48,12 @@ public class CityServiceImpl implements CityService {
     public City getById(Long idCity) {
         Optional<City> city = cityRepository.findById(idCity);
         return city.orElseThrow(()-> new ObjectNotFound("Object not found! Id " + idCity + ", Type: " + City.class.getName()));
+    }
+
+    @Override
+    public List<City> findAllByState(String stateName) {
+        State state = stateService.findByNameIgnoreCase(stateName);
+        return cityRepository.findAllByState(state);
     }
 
     @Override
