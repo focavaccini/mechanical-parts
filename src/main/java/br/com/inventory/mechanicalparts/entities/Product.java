@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -28,8 +29,11 @@ public class Product extends AbstractEntity<Long> implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "active")
+    private Boolean active;
+
     @Transient
-    private Integer quantityUsed;
+    private Integer quantityUsed = 0;
 
     @Column(name = "totalQuantity")
     private Integer totalQuantity;
@@ -48,4 +52,10 @@ public class Product extends AbstractEntity<Long> implements Serializable {
 //            {@JoinColumn(name="product_id")}, inverseJoinColumns=
 //            {@JoinColumn(name="service_performe_id")})
 //    private List<ServicePerformed> servicePerformed;
+
+    @Column(name = "registration_date")
+    private LocalDateTime registrationDate;
+
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
 }
