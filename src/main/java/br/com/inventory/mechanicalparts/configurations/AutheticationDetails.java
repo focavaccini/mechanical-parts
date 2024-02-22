@@ -8,4 +8,6 @@ import lombok.Setter;
 public class AutheticationDetails {
 
     String token;
+
+    String expiredAt;
 }
