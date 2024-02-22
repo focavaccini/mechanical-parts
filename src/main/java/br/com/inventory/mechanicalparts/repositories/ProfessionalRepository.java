@@ -17,7 +17,7 @@ public interface ProfessionalRepository extends JpaRepository<Professional, Long
     @Query("SELECT p " +
             " FROM Professional p " +
             " WHERE 1 = 1 " +
-            " AND p.name = ?1" +
+            " AND upper(p.name) = upper(?1)" +
             " AND 1 = 1 ")
     Professional findByName(String name);
 
