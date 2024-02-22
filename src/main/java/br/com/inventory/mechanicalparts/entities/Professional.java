@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -28,6 +29,9 @@ public class Professional extends AbstractEntity<Long>  implements Serializable 
     @Column(name = "phone", unique = true)
     private String phone;
 
+    @Column(name = "active")
+    private Boolean active;
+
     @Column(name = "email", unique = true)
     private String email;
 
@@ -38,5 +42,11 @@ public class Professional extends AbstractEntity<Long>  implements Serializable 
     @OneToOne
     @JsonIgnore
     private User user;
+
+    @Column(name = "registration_date")
+    private LocalDateTime registrationDate;
+
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
 
 }

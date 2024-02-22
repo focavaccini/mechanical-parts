@@ -15,4 +15,8 @@ public interface ProfessionalService extends IAbstractService<Professional, Long
 
     Professional getById(Long idProfessional);
 
+    Professional findByName(String name);
+
+    List<Professional> findAllByName(String name);
+
 }

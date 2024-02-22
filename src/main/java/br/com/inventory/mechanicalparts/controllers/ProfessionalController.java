@@ -36,4 +36,14 @@ public class ProfessionalController extends AbstractController<ProfessionalServi
     public ProfessionalDTO getById(Long idProfessional) {
         return convert(professionalService.getById(idProfessional), ProfessionalDTO.class );
     }
+
+    @Override
+    public ProfessionalDTO findByName(String name) {
+        return convert(professionalService.findByName(name), ProfessionalDTO.class);
+    }
+
+    @Override
+    public List<ProfessionalDTO> findAllByName(String name) {
+        return convert(professionalService.findAllByName(name), ProfessionalDTO.class);
+    }
 }

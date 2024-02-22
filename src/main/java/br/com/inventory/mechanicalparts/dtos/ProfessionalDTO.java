@@ -9,6 +9,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -30,4 +31,8 @@ public class ProfessionalDTO implements Serializable {
 
     @JsonIgnore
     private List<ServicePerformed> servicePerformed;
+
+    private LocalDateTime registrationDate;
+
+    private LocalDateTime updateDate;
 }
