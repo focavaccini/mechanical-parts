@@ -5,7 +5,9 @@ import br.com.inventory.mechanicalparts.dtos.StateDTO;
 import br.com.inventory.mechanicalparts.entities.State;
 import br.com.inventory.mechanicalparts.services.StateService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -36,5 +38,10 @@ public class StateController extends AbstractController<StateService> implements
     @Override
     public StateDTO getById(Long idState) {
         return convert(stateService.getById(idState), StateDTO.class);
+    }
+
+    @Override
+    public StateDTO findByName(String name) {
+        return convert(stateService.findByName(name), StateDTO.class);
     }
 }

@@ -14,4 +14,8 @@ public interface StateService extends IAbstractService<State, Long> {
     void update(Long idState, State state);
 
     State getById(Long idState);
+
+    State findByNameIgnoreCase(String name);
+
+    State findByName(String name);
 }

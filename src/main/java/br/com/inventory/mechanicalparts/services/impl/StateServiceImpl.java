@@ -2,6 +2,7 @@ package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.entities.State;
+import br.com.inventory.mechanicalparts.exceptions.BadRequestException;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.StateRepository;
 import br.com.inventory.mechanicalparts.services.StateService;
@@ -42,6 +43,25 @@ public class StateServiceImpl implements StateService {
         stateManaged.setSigla(Util.nvl(state.getSigla(), stateManaged.getSigla()));
 
         stateRepository.save(stateManaged);
+    }
+
+    @Override
+    public State findByNameIgnoreCase(String name) {
+        return stateRepository.findByNameIgnoreCase(name);
+    }
+
+    @Override
+    public State findByName(String name) {
+        if(Util.isEmpty(name)) {
+            throw new BadRequestException("Nenhum valor informado");
+        }
+
+        State state = stateRepository.findByName(name);
+
+        if(Util.isEmpty(state)) {
+            throw new ObjectNotFound("Nenhum resultado foi encontrado");
+        }
+        return state;
     }
 
     @Override
