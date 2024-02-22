@@ -1,6 +1,7 @@
 package br.com.inventory.mechanicalparts.controllers.interfaces;
 
 import br.com.inventory.mechanicalparts.dtos.StateDTO;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface IStateController {
 
     @GetMapping(value = "/{idState}")
     StateDTO getById(@PathVariable Long idState);
+
+    @GetMapping(value = "/name")
+    StateDTO findByName(@Param("name") String name);
 }

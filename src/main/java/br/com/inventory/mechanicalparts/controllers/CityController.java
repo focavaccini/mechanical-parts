@@ -42,4 +42,9 @@ public class CityController extends AbstractController<CityService> implements I
     public List<CityDTO> getByStateName(String nameState) {
         return convert(cityService.findAllByState(nameState),CityDTO.class);
     }
+
+    @Override
+    public List<CityDTO> findByName(String name) {
+        return convert(cityService.findAllByName(name),CityDTO.class);
+    }
 }
