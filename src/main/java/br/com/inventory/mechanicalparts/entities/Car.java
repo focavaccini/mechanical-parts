@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -43,8 +44,13 @@ public class Car extends AbstractEntity<Long> implements Serializable {
     private LocalDate yearOfManufacture;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "client_id")
+    @OneToOne
     private Client client;
+
+    @Column(name = "registration_date")
+    private LocalDateTime registrationDate;
+
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
 
 }

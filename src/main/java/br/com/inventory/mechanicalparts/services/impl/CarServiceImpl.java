@@ -2,16 +2,15 @@ package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.entities.Car;
-import br.com.inventory.mechanicalparts.entities.Client;
+import br.com.inventory.mechanicalparts.exceptions.BadRequestException;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.CarRepository;
-import br.com.inventory.mechanicalparts.repositories.ClientRepository;
 import br.com.inventory.mechanicalparts.services.CarService;
-import br.com.inventory.mechanicalparts.services.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,31 +20,25 @@ public class CarServiceImpl implements CarService {
 
     private CarRepository carRepository;
 
-    private ClientService clientService;
-
-    private ClientRepository clientRepository;
-
     @Override
     public Car insert(Car car) {
-
-        Client client = clientService.getById(car.getClient().getId());
-        car.setClient(client);
+        onPrepareInsertOrUpdate(car);
+        car.setRegistrationDate(LocalDateTime.now());
         carRepository.save(car);
-        client.getCars().add(car);
-        clientRepository.save(client);
+
         return car;
     }
 
     @Override
     public void update(Long idCar, Car car) {
-        Car carManaged = carRepository.findById(idCar).orElseThrow();
+        Car carManaged = getById(idCar);
+        carManaged.setUpdateDate(LocalDateTime.now());
         carManaged.setModel(Util.nvl(car.getModel(), carManaged.getModel()));
         carManaged.setFuel(Util.nvl(car.getFuel(), carManaged.getFuel()));
         carManaged.setColor(Util.nvl(car.getColor(), carManaged.getColor()));
         carManaged.setYearOfManufacture(Util.nvl(car.getYearOfManufacture(), carManaged.getYearOfManufacture()));
         carManaged.setLicensePlate(Util.nvl(car.getLicensePlate(), carManaged.getLicensePlate()));
-        carManaged.setClient(Util.nvl(clientRepository.findById(car.getClient().getId()), carManaged.getClient()));
-
+        onPrepareInsertOrUpdate(carManaged);
         carRepository.save(carManaged);
     }
 
@@ -58,6 +51,17 @@ public class CarServiceImpl implements CarService {
     public Car getById(Long idCar) {
         Optional<Car> car = carRepository.findById(idCar);
         return car.orElseThrow(() -> new ObjectNotFound("Object not found! Id " + idCar + ", Type: " + Car.class.getName()));
+    }
+
+    private void onPrepareInsertOrUpdate(Car car) {
+        checkIfLicensePlateExists(car);
+    }
+
+    private void checkIfLicensePlateExists(Car car){
+        Car carManaged = carRepository.findByLicensePlate(car.getLicensePlate());
+        if(carManaged != null && !carManaged.getId().equals(car.getId())){
+            throw new BadRequestException("A placa informada pertence a outro veículo");
+        }
     }
 
     @Override

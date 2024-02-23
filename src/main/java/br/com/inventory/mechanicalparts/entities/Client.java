@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -35,8 +35,11 @@ public class Client extends AbstractEntity<Long> implements Serializable {
     @Column(name = "email", unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Address> addresses;
+    @OneToOne
+    private Address address;
+
+    @Column(name = "active")
+    private Boolean active;
 
     @Column(name = "cpf", unique = true)
     private String cpf;
@@ -48,9 +51,18 @@ public class Client extends AbstractEntity<Long> implements Serializable {
     @Column(name = "sexo")
     private EnumSexo sexo;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Car> cars;
+    @OneToOne(mappedBy = "client",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id")
+    private Car car;
 
     @OneToOne
     private User user;
+
+    @Column(name = "registration_date")
+    private LocalDateTime registrationDate;
+
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
 }

@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -30,4 +31,12 @@ public class ClientDTO implements Serializable {
     private EnumSexo sexo;
 
     private LocalDate birthdate;
+
+    private AddressDTO address;
+
+    private CarDTO car;
+
+    private LocalDateTime registrationDate;
+
+    private LocalDateTime updateDate;
 }
