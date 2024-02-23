@@ -1,5 +1,6 @@
 package br.com.inventory.mechanicalparts.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,5 +28,6 @@ public class AddressDTO implements Serializable {
 
     private String cep;
 
+    @JsonIgnore
     private ClientDTO client;
 }

@@ -1,12 +1,14 @@
 package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -41,7 +43,10 @@ public class Address extends AbstractEntity<Long> implements Serializable {
     @Column(name = "cep")
     private String cep;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
+    @OneToOne
+    @JsonIgnore
     private Client client;
+
+    @Column(name = "data_registro")
+    private LocalDateTime dateRegistro;
 }
