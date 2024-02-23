@@ -1,5 +1,6 @@
 package br.com.inventory.mechanicalparts.controllers.interfaces;
 
+import br.com.inventory.mechanicalparts.dtos.CarDTO;
 import br.com.inventory.mechanicalparts.dtos.ClientDTO;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,12 @@ public interface IClientController {
     @GetMapping(value="/{idClient}")
     ClientDTO getById(@PathVariable("idClient") Long idClient);
 
-    @GetMapping
+    @GetMapping(value = "/listAll")
     List<ClientDTO> getAll();
+
+    @PostMapping(value = "/insertCar/{idClient}")
+    CarDTO insertCar(@PathVariable Long idClient, @RequestBody CarDTO carDTO);
+
+    @PutMapping(value = "/updateCar/{idClient}/idCar/{idCar}")
+    void updateCar(@PathVariable Long idClient, @PathVariable Long idCar, @RequestBody CarDTO carDTO);
 }
