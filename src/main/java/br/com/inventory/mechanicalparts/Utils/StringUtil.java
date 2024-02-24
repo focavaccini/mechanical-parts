@@ -1,7 +1,5 @@
 package br.com.inventory.mechanicalparts.Utils;
 
-//package com.smartbr.clinica.utils;
-
 import lombok.extern.log4j.Log4j2;
 import org.springframework.util.StringUtils;
 

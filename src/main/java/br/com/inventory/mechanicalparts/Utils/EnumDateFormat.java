@@ -1,7 +1,5 @@
 package br.com.inventory.mechanicalparts.Utils;
 
-//package com.smartbr.clinica.pattern.enums;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
