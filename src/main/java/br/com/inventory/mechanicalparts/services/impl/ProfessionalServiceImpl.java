@@ -30,6 +30,8 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     @Override
     public Professional insert(Professional professional) {
         Professional newProfessional = new Professional();
+        onPrepareInsertOrUpdate(professional);
+
         professional.setRegistrationDate(LocalDateTime.now());
 
         User user = userService.saveUser("prefessional", professional.getEmail());
@@ -53,6 +55,9 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         professionalManaged.setName(Util.nvl(professional.getName(), professionalManaged.getName()));
         professionalManaged.setPhone(Util.nvl(professional.getPhone(), professionalManaged.getPhone()));
         professionalManaged.setEmail(Util.nvl(professional.getEmail(), professionalManaged.getEmail()));
+        professionalManaged.setCode(Util.nvl(professional.getCode(), professionalManaged.getCode()));
+
+        onPrepareInsertOrUpdate(professional);
 
         professionalRepository.save(professionalManaged);
     }
@@ -66,6 +71,11 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     public Professional getById(Long idProfessional) {
         Optional<Professional> professional = professionalRepository.findById(idProfessional);
         return professional.orElseThrow(() -> new ObjectNotFound("Object not found! Id " + idProfessional + ", Type: " + Professional.class.getName()));
+    }
+
+    private void onPrepareInsertOrUpdate(Professional professional) {
+        checkIfEmailAlreadyExists(professional);
+        checkIfPhoneAlreadyExists(professional);
     }
 
     private void checkIfEmailAlreadyExists(Professional professional) {

@@ -35,6 +35,9 @@ public class Professional extends AbstractEntity<Long>  implements Serializable 
     @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "code", unique = true)
+    private String code;
+
     @JsonIgnore
     @OneToMany(mappedBy = "professional")
     private List<ServicePerformed> servicePerformed;

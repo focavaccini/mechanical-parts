@@ -29,6 +29,7 @@ public class ProfessionalDTO implements Serializable {
     @Email(message = "Por favor, informe um e-mail válido.")
     private String email;
 
+    private String code;
     @JsonIgnore
     private List<ServicePerformed> servicePerformed;
 
