@@ -76,6 +76,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     private void onPrepareInsertOrUpdate(Professional professional) {
         checkIfEmailAlreadyExists(professional);
         checkIfPhoneAlreadyExists(professional);
+        checkIfCodeAlreadyExists(professional);
     }
 
     private void checkIfEmailAlreadyExists(Professional professional) {
@@ -89,6 +90,13 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         Professional professionalManaged = professionalRepository.findByPhone(professional.getPhone());
         if (professionalManaged != null && !professionalManaged.equals(professional)) {
             throw new BadRequestException("Telefone já pertence a outra pessoa" + professional.getId());
+        }
+    }
+
+    private void checkIfCodeAlreadyExists(Professional professional) {
+        Professional professionalManaged = professionalRepository.findByCode(professional.getCode());
+        if (professionalManaged != null && !professionalManaged.equals(professional)) {
+            throw new BadRequestException("Código já cadastrado " + professional.getId());
         }
     }
 
