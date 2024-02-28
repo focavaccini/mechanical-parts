@@ -58,4 +58,7 @@ public class Product extends AbstractEntity<Long> implements Serializable {
 
     @Column(name = "update_date")
     private LocalDateTime updateDate;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductImages> images;
 }
