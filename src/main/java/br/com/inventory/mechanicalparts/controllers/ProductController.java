@@ -2,10 +2,13 @@ package br.com.inventory.mechanicalparts.controllers;
 
 import br.com.inventory.mechanicalparts.controllers.interfaces.IProductController;
 import br.com.inventory.mechanicalparts.dtos.ProductDTO;
+import br.com.inventory.mechanicalparts.dtos.ProductImagesDTO;
 import br.com.inventory.mechanicalparts.entities.Product;
+import br.com.inventory.mechanicalparts.entities.ProductImages;
 import br.com.inventory.mechanicalparts.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,6 +26,11 @@ public class ProductController extends AbstractController<ProductService> implem
     }
 
     @Override
+    public void insertImage(Long idProduct, MultipartFile multipartFile) {
+        productService.insertImage(idProduct, multipartFile);
+    }
+
+    @Override
     public void update(Long idProduct, ProductDTO productDTO) {
         Product product = convert(productDTO, Product.class);
         productService.update(idProduct, product);
@@ -36,5 +44,10 @@ public class ProductController extends AbstractController<ProductService> implem
     @Override
     public ProductDTO getById(Long idProduct) {
         return convert(productService.getById(idProduct), ProductDTO.class);
+    }
+
+    @Override
+    public List<ProductImages> getAllByProduct(Long idProduct) {
+        return convert(productService.getAllByProduct(idProduct), ProductImagesDTO.class);
     }
 }

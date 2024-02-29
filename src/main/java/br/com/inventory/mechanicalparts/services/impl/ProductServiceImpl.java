@@ -2,13 +2,16 @@ package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.entities.Product;
+import br.com.inventory.mechanicalparts.entities.ProductImages;
 import br.com.inventory.mechanicalparts.exceptions.BadRequestException;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.ProductRepository;
+import br.com.inventory.mechanicalparts.services.ProductImageService;
 import br.com.inventory.mechanicalparts.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +23,8 @@ public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
 
+    private ProductImageService productImageService;
+
     @Override
     public Product insert(Product product) {
         product.setActive(true);
@@ -29,13 +34,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void insertImage(Long idProduct, MultipartFile multipartFile) {
+        ProductImages productImages = new ProductImages();
+        Product product = getById(idProduct);
+        productImages.setProduct(product);
+        productImageService.insert(productImages, multipartFile);
+    }
+
+    @Override
     public void update(Long idProduct, Product product) {
         Product productManaged = getById(idProduct);
         productManaged.setUpdateDate(LocalDateTime.now());
         productManaged.setName(Util.nvl(product.getName(), productManaged.getName()));
         productManaged.setValue(Util.nvl(product.getValue(), productManaged.getValue()));
         productManaged.setIdentifyCode(Util.nvl(product.getIdentifyCode(), productManaged.getIdentifyCode()));
-
         getRepository().save(productManaged);
     }
 
@@ -56,6 +68,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAll() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public List<ProductImages> getAllByProduct(Long idProduct) {
+        Product product = getById(idProduct);
+        return productImageService.getAllByProduct(product);
     }
 
     private void onPrepareInsertOrUpdate(Product product) {
