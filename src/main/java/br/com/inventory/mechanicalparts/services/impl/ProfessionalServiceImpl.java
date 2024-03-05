@@ -50,7 +50,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
     @Override
     public void update(Long idProfessional, Professional professional) {
-        Professional professionalManaged = professionalRepository.findById(idProfessional).orElseThrow();
+        Professional professionalManaged = getById(idProfessional);
         professionalManaged.setUpdateDate(LocalDateTime.now());
         professionalManaged.setName(Util.nvl(professional.getName(), professionalManaged.getName()));
         professionalManaged.setPhone(Util.nvl(professional.getPhone(), professionalManaged.getPhone()));
@@ -81,22 +81,22 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
     private void checkIfEmailAlreadyExists(Professional professional) {
         Professional professionalManaged = professionalRepository.findByEmail(professional.getEmail());
-        if (professionalManaged != null && !professionalManaged.equals(professional)) {
-            throw new BadRequestException("Email já pertence a outra pessoa" + professional.getId());
+        if (professionalManaged != null && !professionalManaged.getId().equals(professional.getId())) {
+            throw new BadRequestException("Email já pertence a outra pessoa");
         }
     }
 
     private void checkIfPhoneAlreadyExists(Professional professional) {
         Professional professionalManaged = professionalRepository.findByPhone(professional.getPhone());
-        if (professionalManaged != null && !professionalManaged.equals(professional)) {
-            throw new BadRequestException("Telefone já pertence a outra pessoa" + professional.getId());
+        if (professionalManaged != null && !professionalManaged.getId().equals(professional.getId())) {
+            throw new BadRequestException("Telefone já pertence a outra pessoa");
         }
     }
 
     private void checkIfCodeAlreadyExists(Professional professional) {
         Professional professionalManaged = professionalRepository.findByCode(professional.getCode());
-        if (professionalManaged != null && !professionalManaged.equals(professional)) {
-            throw new BadRequestException("Código já cadastrado " + professional.getId());
+        if (professionalManaged != null && !professionalManaged.getId().equals(professional.getId())) {
+            throw new BadRequestException("Código já cadastrado ");
         }
     }
 
