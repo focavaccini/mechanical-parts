@@ -1,5 +1,6 @@
 package br.com.inventory.mechanicalparts.services.impl;
 
+import br.com.inventory.mechanicalparts.Utils.DateUtil;
 import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.entities.Payment;
 import br.com.inventory.mechanicalparts.entities.Product;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -99,9 +101,17 @@ public class ServicePerformedServiceImpl implements ServicePerformedService {
     public List<ServicePerformed> getAll() {
         List<ServicePerformed> services = servicePerformedRepository.findAll();
         for (ServicePerformed service : services) {
-            Integer days = service.getDeliveryDate().compareTo(LocalDate.now());
-            if (days < 0) {
-                service.setStatus(EnumStatusServicePerformed.ATRASADO);
+
+            if (!service.getStatus().equals(EnumStatusServicePerformed.FINALIZADO) && !service.getStatus().equals(EnumStatusServicePerformed.ENTREGUE)) {
+                int daysToDelivery = DateUtil.calculateDifference(ChronoUnit.DAYS, service.getDeliveryDate().atStartOfDay(), LocalDateTime.now());
+                if (service.getDeliveryDate().isBefore(LocalDate.now())) {
+                    service.setStatus(EnumStatusServicePerformed.ATRASADO);
+                    service.setDaysForDelivery(daysToDelivery * -1);
+                } else {
+                    service.setDaysForDelivery(daysToDelivery * -1);
+                }
+            } else {
+                service.setDaysForDelivery(0);
             }
         }
         return services;
@@ -125,6 +135,7 @@ public class ServicePerformedServiceImpl implements ServicePerformedService {
     @Override
     public void insertPayment(Long idServicePerformed, Payment payment) {
         ServicePerformed servicePerformed = getById(idServicePerformed);
+        servicePerformed.setStatus(EnumStatusServicePerformed.ENTREGUE);
         Payment paymentSaved = paymentService.insert(servicePerformed, payment);
         servicePerformed.setPayment(paymentSaved);
         update(servicePerformed.getId(), servicePerformed);
