@@ -2,7 +2,10 @@ package br.com.inventory.mechanicalparts.Utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
@@ -90,6 +93,10 @@ public class DateUtil {
         final LocalDateTime ldFinal = toLocalDateTime(dateFinal);
 
         return Math.toIntExact(unit.between(ldInitial, ldFinal));
+    }
+
+    public static Integer calculateDifference(ChronoUnit unit, LocalDateTime dateInicial, LocalDateTime dateFinal) {
+        return Math.toIntExact(unit.between(dateInicial, dateFinal));
     }
 
     public static Date getDate() {
