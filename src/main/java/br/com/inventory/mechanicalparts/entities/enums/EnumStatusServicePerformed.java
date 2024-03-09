@@ -3,7 +3,11 @@ package br.com.inventory.mechanicalparts.entities.enums;
 public enum EnumStatusServicePerformed {
 
     EM_DIA("EM DIA", "EM DIA"),
-    ATRASADO("ATRASADO", "ATRASADO");
+    ATRASADO("ATRASADO", "ATRASADO"),
+
+    FINALIZADO("FINALIZADO", "FINALIZDO"),
+
+    ENTREGUE("ENTREGUE", "ENTREGUE");
 
     private String code;
     private String description;
