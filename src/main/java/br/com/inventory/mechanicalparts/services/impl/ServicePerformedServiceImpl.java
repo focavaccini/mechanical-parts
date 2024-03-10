@@ -88,33 +88,32 @@ public class ServicePerformedServiceImpl implements ServicePerformedService {
     @Override
     public ServicePerformed getById(Long idServicePerformed) {
         Optional<ServicePerformed> servicePerformed = servicePerformedRepository.findById(idServicePerformed);
-
-        Integer days = servicePerformed.get().getDeliveryDate().compareTo(LocalDate.now());
-        if (days < 0) {
-            servicePerformed.get().setStatus(EnumStatusServicePerformed.ATRASADO);
-        }
-        servicePerformed.get().setDaysForDelivery(days);
-        return servicePerformed.orElseThrow(() -> new ObjectNotFound("Object not found! Id " + idServicePerformed + ", Type: " + ServicePerformed.class.getName()));
+        ServicePerformed servicePerformedEntity = servicePerformed.orElseThrow(() -> new ObjectNotFound("Object not found! Id " + idServicePerformed + ", Type: " + ServicePerformed.class.getName()));
+        validateStatusServicePerformed(servicePerformedEntity);
+        return servicePerformedEntity;
     }
 
     @Override
     public List<ServicePerformed> getAll() {
         List<ServicePerformed> services = servicePerformedRepository.findAll();
         for (ServicePerformed service : services) {
-
-            if (!service.getStatus().equals(EnumStatusServicePerformed.FINALIZADO) && !service.getStatus().equals(EnumStatusServicePerformed.ENTREGUE)) {
-                int daysToDelivery = DateUtil.calculateDifference(ChronoUnit.DAYS, service.getDeliveryDate().atStartOfDay(), LocalDateTime.now());
-                if (service.getDeliveryDate().isBefore(LocalDate.now())) {
-                    service.setStatus(EnumStatusServicePerformed.ATRASADO);
-                    service.setDaysForDelivery(daysToDelivery * -1);
-                } else {
-                    service.setDaysForDelivery(daysToDelivery * -1);
-                }
-            } else {
-                service.setDaysForDelivery(0);
-            }
+            validateStatusServicePerformed(service);
         }
         return services;
+    }
+
+    private void validateStatusServicePerformed(ServicePerformed service) {
+        if (!service.getStatus().equals(EnumStatusServicePerformed.FINALIZADO) && !service.getStatus().equals(EnumStatusServicePerformed.ENTREGUE)) {
+            int daysToDelivery = DateUtil.calculateDifference(ChronoUnit.DAYS, service.getDeliveryDate().atStartOfDay(), LocalDateTime.now());
+            if (service.getDeliveryDate().isBefore(LocalDate.now())) {
+                service.setStatus(EnumStatusServicePerformed.ATRASADO);
+                service.setDaysForDelivery(daysToDelivery * -1);
+            } else {
+                service.setDaysForDelivery(daysToDelivery * -1);
+            }
+        } else {
+            service.setDaysForDelivery(0);
+        }
     }
 
     private BigDecimal calculoTotalDoServico(Product product, Integer quantityUsed) {
