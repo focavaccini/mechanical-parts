@@ -71,13 +71,14 @@ public class ServicePerformedServiceImpl implements ServicePerformedService {
     public void update(Long idServicePerformed, ServicePerformed servicePerformed) {
         ServicePerformed servicePerformedManaged = getById(idServicePerformed);
 
-        servicePerformed.setUpdateDate(LocalDateTime.now());
+        servicePerformedManaged.setUpdateDate(LocalDateTime.now());
 
         servicePerformedManaged.setDescription(Util.nvl(servicePerformed.getDescription(), servicePerformedManaged.getDescription()));
         servicePerformedManaged.setServiceDays(Util.nvl(servicePerformed.getServiceDays(), servicePerformedManaged.getServiceDays()));
         servicePerformedManaged.setObservation(Util.nvl(servicePerformed.getObservation(), servicePerformedManaged.getObservation()));
         servicePerformedManaged.setLaborCost(Util.nvl(servicePerformed.getLaborCost(), servicePerformedManaged.getLaborCost()));
         servicePerformedManaged.setTotalValue(Util.nvl(servicePerformed.getTotalValue(), servicePerformedManaged.getTotalValue()));
+        servicePerformedManaged.setStatus(Util.nvl(servicePerformed.getStatus(), servicePerformedManaged.getStatus()));
         servicePerformedManaged.setProblemReported(Util.nvl(servicePerformed.getProblemReported(), servicePerformedManaged.getProblemReported()));
         servicePerformedManaged.setDeliveryDate(Util.nvl(servicePerformed.getDeliveryDate(), servicePerformedManaged.getDeliveryDate()));
         servicePerformedManaged.setUsedProducts(Util.nvl(servicePerformed.getUsedProducts(), servicePerformedManaged.getUsedProducts()));
