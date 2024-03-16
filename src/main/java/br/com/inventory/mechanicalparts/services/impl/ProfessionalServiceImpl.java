@@ -128,6 +128,12 @@ public class ProfessionalServiceImpl implements ProfessionalService {
         return professionals;
     }
 
+
+    @Override
+    public Professional findByUserId(Long userId) {
+        return professionalRepository.findByUserId(userId);
+    }
+
     @Override
     public JpaRepository<Professional, Long> getRepository() {
         return this.professionalRepository;

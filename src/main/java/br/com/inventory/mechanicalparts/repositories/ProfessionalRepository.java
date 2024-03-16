@@ -14,6 +14,8 @@ public interface ProfessionalRepository extends JpaRepository<Professional, Long
 
     Professional findByPhone(String phone);
 
+    Professional findByCode(String code);
+
     @Query("SELECT p " +
             " FROM Professional p " +
             " WHERE 1 = 1 " +
@@ -27,4 +29,6 @@ public interface ProfessionalRepository extends JpaRepository<Professional, Long
             " AND p.name LIKE CONCAT('%', ?1,'%')" +
             " AND 1 = 1 ")
     List<Professional> findAllByName(String name);
+
+    Professional findByUserId(Long userId);
 }
