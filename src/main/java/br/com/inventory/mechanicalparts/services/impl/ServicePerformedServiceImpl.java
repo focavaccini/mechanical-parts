@@ -2,9 +2,7 @@ package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.DateUtil;
 import br.com.inventory.mechanicalparts.Utils.Util;
-import br.com.inventory.mechanicalparts.entities.Payment;
-import br.com.inventory.mechanicalparts.entities.Product;
-import br.com.inventory.mechanicalparts.entities.ServicePerformed;
+import br.com.inventory.mechanicalparts.entities.*;
 import br.com.inventory.mechanicalparts.entities.enums.EnumStatusServicePerformed;
 import br.com.inventory.mechanicalparts.exceptions.BadRequestException;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
@@ -12,6 +10,7 @@ import br.com.inventory.mechanicalparts.repositories.ServicePerformedRepository;
 import br.com.inventory.mechanicalparts.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -96,7 +95,9 @@ public class ServicePerformedServiceImpl implements ServicePerformedService {
 
     @Override
     public List<ServicePerformed> getAll() {
-        List<ServicePerformed> services = servicePerformedRepository.findAll();
+        User user = getUsuarioLogado();
+        Professional professional = professionalService.findByUserId(user.getId());
+        List<ServicePerformed> services = servicePerformedRepository.findAllByProfessionalId(professional.getId());
         for (ServicePerformed service : services) {
             validateStatusServicePerformed(service);
         }
@@ -139,6 +140,10 @@ public class ServicePerformedServiceImpl implements ServicePerformedService {
         Payment paymentSaved = paymentService.insert(servicePerformed, payment);
         servicePerformed.setPayment(paymentSaved);
         update(servicePerformed.getId(), servicePerformed);
+    }
+
+    private User getUsuarioLogado() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
     @Override
