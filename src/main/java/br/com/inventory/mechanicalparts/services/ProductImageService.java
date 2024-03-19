@@ -5,6 +5,7 @@ import br.com.inventory.mechanicalparts.entities.Product;
 import br.com.inventory.mechanicalparts.entities.ProductImages;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public interface ProductImageService extends IAbstractService<ProductImages, Long> {
@@ -16,5 +17,7 @@ public interface ProductImageService extends IAbstractService<ProductImages, Lon
     ProductImages getById(Long idProductImages);
 
     List<ProductImages> getAllByProduct(Product product);
+
+    BufferedImage getJpgImageFromFile(MultipartFile multipartFile);
 
 }
