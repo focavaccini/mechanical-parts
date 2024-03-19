@@ -1,10 +1,9 @@
 package br.com.inventory.mechanicalparts.services;
 
-import org.springframework.web.multipart.MultipartFile;
-
+import java.io.InputStream;
 import java.net.URI;
 
 public interface S3Service {
-    URI uploadFile(MultipartFile multipartFile);
+    URI uploadFile(InputStream inputStream, String fileName, String contentType);
 
 }
