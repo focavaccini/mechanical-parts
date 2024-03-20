@@ -1,11 +1,13 @@
 package br.com.inventory.mechanicalparts.services.impl;
 
 import br.com.inventory.mechanicalparts.Utils.Util;
+import br.com.inventory.mechanicalparts.entities.Category;
 import br.com.inventory.mechanicalparts.entities.Product;
 import br.com.inventory.mechanicalparts.entities.ProductImages;
 import br.com.inventory.mechanicalparts.exceptions.BadRequestException;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.ProductRepository;
+import br.com.inventory.mechanicalparts.services.CategoryService;
 import br.com.inventory.mechanicalparts.services.ProductImageService;
 import br.com.inventory.mechanicalparts.services.ProductService;
 import lombok.AllArgsConstructor;
@@ -25,8 +27,12 @@ public class ProductServiceImpl implements ProductService {
 
     private ProductImageService productImageService;
 
+    private CategoryService categoryService;
+
     @Override
     public Product insert(Product product) {
+        Category category = categoryService.findByName(product.getCategory().getName());
+        product.setCategory(category);
         product.setActive(true);
         product.setRegistrationDate(LocalDateTime.now());
         onPrepareInsertOrUpdate(product);
@@ -47,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
         productManaged.setUpdateDate(LocalDateTime.now());
         productManaged.setName(Util.nvl(product.getName(), productManaged.getName()));
         productManaged.setValue(Util.nvl(product.getValue(), productManaged.getValue()));
+        productManaged.setCategory(Util.nvl(product.getCategory(), productManaged.getCategory()));
         productManaged.setIdentifyCode(Util.nvl(product.getIdentifyCode(), productManaged.getIdentifyCode()));
         getRepository().save(productManaged);
     }

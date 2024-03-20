@@ -27,6 +27,8 @@ public class ProductDTO implements Serializable {
 
     private Integer quantityUsed;
 
+    private CategoryDTO category;
+
     private LocalDateTime registrationDate;
 
     private LocalDateTime updateDate;
