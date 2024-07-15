@@ -43,23 +43,15 @@ public class ServicePerformedServiceImpl implements ServicePerformedService {
     @Override
     @Transactional
     public ServicePerformed insert(ServicePerformed servicePerformed) {
-        BigDecimal value = BigDecimal.ZERO;
         onPrepareInsertOrUpdate(servicePerformed);
         servicePerformed.setStatus(EnumStatusServicePerformed.EM_DIA);
         servicePerformed.setRegistrationDate(LocalDateTime.now());
+        servicePerformed.setUpdateDate(LocalDateTime.now());
 
-        List<Product> listServices = new ArrayList<>();
-
-        for (Product products : servicePerformed.getUsedProducts()) {
-            Product product = productService.getById(products.getId());
-            product = productService.updateQuantity(product, products.getQuantityUsed());
-            value = value.add(calculoTotalDoServico(product, products.getQuantityUsed()));
-            servicePerformed.setTotalValue((servicePerformed.getLaborCost().add(value)));
-            listServices.add(product);
-        }
+        prepareProductsService(servicePerformed);
 
         servicePerformed.setServiceDays(servicePerformed.getDeliveryDate().compareTo(LocalDate.now()));
-        servicePerformed.setUsedProducts(listServices);
+        servicePerformed.setDaysForDelivery(servicePerformed.getServiceDays());
         servicePerformed.setProfessional(professionalService.getById(servicePerformed.getProfessional().getId()));
         servicePerformed.setCar(carService.getById(servicePerformed.getCar().getId()));
         servicePerformed = servicePerformedRepository.save(servicePerformed);
@@ -68,21 +60,39 @@ public class ServicePerformedServiceImpl implements ServicePerformedService {
 
     @Override
     public void update(Long idServicePerformed, ServicePerformed servicePerformed) {
+        BigDecimal value = BigDecimal.ZERO;
         ServicePerformed servicePerformedManaged = getById(idServicePerformed);
 
         servicePerformedManaged.setUpdateDate(LocalDateTime.now());
-
         servicePerformedManaged.setDescription(Util.nvl(servicePerformed.getDescription(), servicePerformedManaged.getDescription()));
-        servicePerformedManaged.setServiceDays(Util.nvl(servicePerformed.getServiceDays(), servicePerformedManaged.getServiceDays()));
         servicePerformedManaged.setObservation(Util.nvl(servicePerformed.getObservation(), servicePerformedManaged.getObservation()));
         servicePerformedManaged.setLaborCost(Util.nvl(servicePerformed.getLaborCost(), servicePerformedManaged.getLaborCost()));
-        servicePerformedManaged.setTotalValue(Util.nvl(servicePerformed.getTotalValue(), servicePerformedManaged.getTotalValue()));
         servicePerformedManaged.setStatus(Util.nvl(servicePerformed.getStatus(), servicePerformedManaged.getStatus()));
         servicePerformedManaged.setProblemReported(Util.nvl(servicePerformed.getProblemReported(), servicePerformedManaged.getProblemReported()));
         servicePerformedManaged.setDeliveryDate(Util.nvl(servicePerformed.getDeliveryDate(), servicePerformedManaged.getDeliveryDate()));
+        servicePerformedManaged.setServiceDays(Util.nvl(servicePerformed.getDeliveryDate().compareTo(LocalDate.now()), servicePerformedManaged.getDeliveryDate().compareTo(LocalDate.now())));
+
+        prepareProductsService(servicePerformed);
+
+        servicePerformedManaged.setTotalValue(Util.nvl(servicePerformed.getTotalValue(), servicePerformedManaged.getTotalValue()));
         servicePerformedManaged.setUsedProducts(Util.nvl(servicePerformed.getUsedProducts(), servicePerformedManaged.getUsedProducts()));
 
         servicePerformedRepository.save(servicePerformedManaged);
+    }
+
+    private void prepareProductsService(ServicePerformed servicePerformed) {
+        BigDecimal value = BigDecimal.ZERO;
+        List<Product> listProductServices = new ArrayList<>();
+
+        for (Product products : servicePerformed.getUsedProducts()) {
+            Product product = productService.getById(products.getId());
+            product = productService.updateQuantity(product, products.getQuantityUsed());
+            value = value.add(calculoTotalDoServico(product, products.getQuantityUsed()));
+            servicePerformed.setTotalValue(servicePerformed.getLaborCost().add(value));
+            listProductServices.add(product);
+        }
+
+        servicePerformed.setUsedProducts(listProductServices);
     }
 
     @Override
