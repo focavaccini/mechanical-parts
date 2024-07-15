@@ -61,8 +61,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product updateQuantity(Product product, Integer usedQuantity) {
         Product productManaged = getById(product.getId());
-        productManaged.setTotalQuantity(productManaged.getTotalQuantity() - usedQuantity);
 
+        if (productManaged.getTotalQuantity() < usedQuantity) {
+            throw new BadRequestException("Quantidade em estoque do produto " + productManaged.getName() + " insuficiente!");
+        }
+
+        productManaged.setTotalQuantity(productManaged.getTotalQuantity() - usedQuantity);
+        productManaged.setActive(productManaged.getTotalQuantity() > 0 ? Boolean.TRUE : Boolean.FALSE);
         return getRepository().save(productManaged);
     }
 
