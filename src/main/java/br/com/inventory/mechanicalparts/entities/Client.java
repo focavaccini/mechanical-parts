@@ -26,13 +26,13 @@ public class Client extends AbstractEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_client")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "phone", unique = true)
+    @Column(name = "phone", unique = true, nullable = false)
     private String phone;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @OneToOne
@@ -41,14 +41,14 @@ public class Client extends AbstractEntity<Long> implements Serializable {
     @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "cpf", unique = true)
+    @Column(name = "cpf", unique = true, nullable = false)
     private String cpf;
 
-    @Column(name = "birthdate")
+    @Column(name = "birthdate", nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthdate;
 
-    @Column(name = "sexo")
+    @Column(name = "sexo", nullable = false)
     private EnumSexo sexo;
 
     @OneToOne(mappedBy = "client",
