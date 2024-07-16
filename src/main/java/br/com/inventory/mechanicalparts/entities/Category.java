@@ -23,10 +23,10 @@ public class Category extends AbstractEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_category")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "code")
+    @Column(name = "code", unique = true, nullable = false)
     private String code;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
