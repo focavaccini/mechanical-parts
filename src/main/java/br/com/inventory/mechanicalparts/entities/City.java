@@ -22,10 +22,10 @@ public class City extends AbstractEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_city")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "id_state")
+    @JoinColumn(name = "id_state", nullable = false)
     private State state;
 }
