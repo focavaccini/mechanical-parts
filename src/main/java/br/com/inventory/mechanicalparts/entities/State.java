@@ -22,9 +22,9 @@ public class State extends AbstractEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_state")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "sigla")
+    @Column(name = "sigla", unique = true, nullable = false)
     private String sigla;
 }
