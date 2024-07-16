@@ -60,7 +60,6 @@ public class ServicePerformedServiceImpl implements ServicePerformedService {
 
     @Override
     public void update(Long idServicePerformed, ServicePerformed servicePerformed) {
-        BigDecimal value = BigDecimal.ZERO;
         ServicePerformed servicePerformedManaged = getById(idServicePerformed);
 
         servicePerformedManaged.setUpdateDate(LocalDateTime.now());

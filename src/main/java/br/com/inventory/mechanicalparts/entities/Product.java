@@ -26,7 +26,7 @@ public class Product extends AbstractEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_product")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "active")
@@ -38,10 +38,10 @@ public class Product extends AbstractEntity<Long> implements Serializable {
     @Column(name = "totalQuantity")
     private Integer totalQuantity;
 
-    @Column(name = "value")
+    @Column(name = "value", nullable = false)
     private BigDecimal value;
 
-    @Column(name = "identify_code", unique = true)
+    @Column(name = "identify_code", unique = true, nullable = false)
     private String identifyCode;
 
     @JsonIgnore
@@ -63,6 +63,6 @@ public class Product extends AbstractEntity<Long> implements Serializable {
     private List<ProductImages> images;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 }
