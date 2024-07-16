@@ -23,11 +23,11 @@ public class ProductImages extends AbstractEntity<Long> implements Serializable 
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_product_images")
     private Long id;
 
-    @Column(name = "path")
+    @Column(name = "path", nullable = false)
     private String path;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @Column(name = "registration_date")
