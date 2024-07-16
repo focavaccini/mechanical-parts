@@ -27,19 +27,19 @@ public class Car extends AbstractEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_car")
     private Long id;
 
-    @Column(name = "model")
+    @Column(name = "model", nullable = false)
     private String model;
 
-    @Column(name = "color")
+    @Column(name = "color", nullable = false)
     private String color;
 
-    @Column(name = "license_plate", unique = true)
+    @Column(name = "license_plate", unique = true, nullable = false)
     private String licensePlate;
 
-    @Column(name = "type_of_fuel")
+    @Column(name = "type_of_fuel", nullable = false)
     private EnumTypeFuel fuel;
 
-    @Column(name = "year_of_manufacture")
+    @Column(name = "year_of_manufacture", nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate yearOfManufacture;
 
