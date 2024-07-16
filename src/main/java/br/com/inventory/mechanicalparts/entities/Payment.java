@@ -5,9 +5,6 @@ import br.com.inventory.mechanicalparts.entities.enums.EnumPaymentForm;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
@@ -28,7 +25,7 @@ public class Payment extends AbstractEntity<Long> implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_payment")
     private Long id;
 
-    @Column(name = "payment_form")
+    @Column(name = "payment_form", nullable = false)
     private EnumPaymentForm paymentForm;
 
     @Column(name = "payment_date")
@@ -37,6 +34,6 @@ public class Payment extends AbstractEntity<Long> implements Serializable {
     @Column(name = "total_value_paied")
     private BigDecimal totalValuePaied;
 
-    @Column(name = "installments")
+    @Column(name = "installments", nullable = false)
     private Integer installments;
 }
