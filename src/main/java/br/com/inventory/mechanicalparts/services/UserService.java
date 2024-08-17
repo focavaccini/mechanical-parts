@@ -5,12 +5,12 @@ import br.com.inventory.mechanicalparts.entities.User;
 
 public interface UserService extends IAbstractService<User, Long> {
 
-    User saveUser(String emailUser);
+    User saveUser(String typeUser, String emailUser);
 
     String generatePassword(String secretKey);
 
     void updateChangePassword(String email, String password, String newPassword);
 
-    User findByPassword(String token);
+    User findByPasswordAndLogin(String token, String login);
 
 }
