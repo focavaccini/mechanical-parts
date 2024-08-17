@@ -5,6 +5,7 @@ import br.com.inventory.mechanicalparts.entities.Professional;
 import br.com.inventory.mechanicalparts.entities.User;
 import br.com.inventory.mechanicalparts.exceptions.BadRequestException;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
+import br.com.inventory.mechanicalparts.exceptions.UniqueException;
 import br.com.inventory.mechanicalparts.repositories.ProfessionalRepository;
 import br.com.inventory.mechanicalparts.services.ProfessionalService;
 import br.com.inventory.mechanicalparts.services.UserService;
@@ -82,21 +83,21 @@ public class ProfessionalServiceImpl implements ProfessionalService {
     private void checkIfEmailAlreadyExists(Professional professional) {
         Professional professionalManaged = professionalRepository.findByEmail(professional.getEmail());
         if (professionalManaged != null && !professionalManaged.getId().equals(professional.getId())) {
-            throw new BadRequestException("Email já pertence a outra pessoa");
+            throw new UniqueException("Email já pertence a outra pessoa");
         }
     }
 
     private void checkIfPhoneAlreadyExists(Professional professional) {
         Professional professionalManaged = professionalRepository.findByPhone(professional.getPhone());
         if (professionalManaged != null && !professionalManaged.getId().equals(professional.getId())) {
-            throw new BadRequestException("Telefone já pertence a outra pessoa");
+            throw new UniqueException("Telefone já pertence a outra pessoa");
         }
     }
 
     private void checkIfCodeAlreadyExists(Professional professional) {
         Professional professionalManaged = professionalRepository.findByCode(professional.getCode());
         if (professionalManaged != null && !professionalManaged.getId().equals(professional.getId())) {
-            throw new BadRequestException("Código já cadastrado ");
+            throw new UniqueException("Código já cadastrado");
         }
     }
 
