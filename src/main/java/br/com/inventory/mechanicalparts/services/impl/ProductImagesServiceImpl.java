@@ -37,18 +37,19 @@ public class ProductImagesServiceImpl implements ProductImageService {
 
     @Override
     public void insert(ProductImages productImages, MultipartFile multipartFile) {
-        isValidTypeImage(multipartFile);
+        //isValidTypeImage(multipartFile);
 
-        BufferedImage jpgImage = getJpgImageFromFile(multipartFile);
-        int size = 300;
+//        BufferedImage jpgImage = getJpgImageFromFile(multipartFile);
+//        int size = 300;
         String prefix = "pd-";
 
-        jpgImage = cropSquare(jpgImage);
-        jpgImage = resize(jpgImage, size);
+//        jpgImage = cropSquare(jpgImage);
+//        jpgImage = resize(jpgImage, size);
 
         String fileName = prefix + productImages.getProduct().getIdentifyCode() + ".jpg";
 
-        URI uri = s3Service.uploadFile(getInputStream(jpgImage, "jpg"), fileName, "image");
+//        URI uri = s3Service.uploadFile(getInputStream(jpgImage, "jpg"), fileName, "image", multipartFile.getSize());
+        URI uri = s3Service.uploadFile(multipartFile, fileName);
         productImages.setPath(String.valueOf(uri));
         productImages.setRegistrationDate(LocalDateTime.now());
         productImagesRepository.save(productImages);
@@ -75,11 +76,20 @@ public class ProductImagesServiceImpl implements ProductImageService {
 
     @Override
     public BufferedImage getJpgImageFromFile(MultipartFile multipartFile) {
+        String fileExtension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+
+        if (Util.isEmpty(fileExtension)) {
+            throw new BadRequestException("Image format invalid/empty");
+        }
+
+        if (!fileExtension.equals("png") && !fileExtension.equals("jpg")) {
+            throw new FileException("Image Format Invalid");
+        }
 
         try {
             BufferedImage image = ImageIO.read(multipartFile.getInputStream());
 
-            if (image.equals("png")) {
+            if (image != null && fileExtension.equalsIgnoreCase("png")) {
                 image = pngToJpg(image);
             }
 
