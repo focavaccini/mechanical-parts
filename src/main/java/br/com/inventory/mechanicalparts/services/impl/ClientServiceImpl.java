@@ -43,7 +43,7 @@ public class ClientServiceImpl implements ClientService {
     public Client insert(Client client) {
         Client newClient;
         onPrepareInsertOrUpdate(client);
-        User user = userService.saveUser("client", client.getEmail());
+        User user = userService.saveUser(client.getEmail());
         client.setActive(true);
         client.setUser(user);
         client.setRegistrationDate(LocalDateTime.now());
