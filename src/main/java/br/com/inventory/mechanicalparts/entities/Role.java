@@ -1,10 +1,11 @@
 package br.com.inventory.mechanicalparts.entities;
 
+import br.com.inventory.mechanicalparts.entities.enums.EnumRole;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
@@ -20,13 +21,16 @@ public class Role extends AbstractEntity<Long> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_role")
+    @SequenceGenerator(name = "id_role", sequenceName = "role_seq", allocationSize = 1)
     private Long id;
 
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+    private EnumRole role;
+
+//    @ManyToMany(mappedBy = "role")
+//    private Collection<User> users;
 
     @ManyToMany
     @JoinTable(

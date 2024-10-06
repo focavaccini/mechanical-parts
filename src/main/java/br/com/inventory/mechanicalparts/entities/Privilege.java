@@ -1,9 +1,9 @@
 package br.com.inventory.mechanicalparts.entities;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.Collection;
 
 @Getter
@@ -13,7 +13,8 @@ import java.util.Collection;
 public class Privilege {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_privelege")
+    @SequenceGenerator(name = "id_privelege", sequenceName = "privelege_seq", allocationSize = 1)
     private Long id;
 
     private String name;
