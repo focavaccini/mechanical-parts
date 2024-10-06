@@ -3,16 +3,17 @@ package br.com.inventory.mechanicalparts.services.impl;
 import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.entities.Professional;
 import br.com.inventory.mechanicalparts.entities.User;
+import br.com.inventory.mechanicalparts.entities.enums.EnumRole;
 import br.com.inventory.mechanicalparts.exceptions.BadRequestException;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.ProfessionalRepository;
 import br.com.inventory.mechanicalparts.services.ProfessionalService;
 import br.com.inventory.mechanicalparts.services.UserService;
+import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +35,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
         professional.setRegistrationDate(LocalDateTime.now());
 
-        User user = userService.saveUser(professional.getEmail());
+        User user = userService.saveUser(professional.getEmail(), EnumRole.ADMIN);
         professional.setUser(user);
         professional.setActive(true);
         newProfessional = professionalRepository.save(professional);
@@ -50,6 +51,7 @@ public class ProfessionalServiceImpl implements ProfessionalService {
 
     @Override
     public void update(Long idProfessional, Professional professional) {
+        professional.setId(idProfessional);
         Professional professionalManaged = getById(idProfessional);
         professionalManaged.setUpdateDate(LocalDateTime.now());
         professionalManaged.setName(Util.nvl(professional.getName(), professionalManaged.getName()));

@@ -2,10 +2,11 @@ package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,11 +17,13 @@ import java.util.List;
 @Table(name = "tb_professional")
 public class Professional extends AbstractEntity<Long>  implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_professional")
+    @SequenceGenerator(name = "id_professional", sequenceName = "professional_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name")

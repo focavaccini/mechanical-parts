@@ -2,11 +2,11 @@ package br.com.inventory.mechanicalparts.dtos;
 
 import br.com.inventory.mechanicalparts.entities.ServicePerformed;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Transient;
-import javax.validation.constraints.Email;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;

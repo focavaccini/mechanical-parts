@@ -2,10 +2,10 @@ package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -24,6 +24,7 @@ public class Product extends AbstractEntity<Long> implements Serializable {
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_product")
+    @SequenceGenerator(name = "id_product", sequenceName = "product_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name", nullable = false)

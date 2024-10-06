@@ -1,10 +1,10 @@
 package br.com.inventory.mechanicalparts.dtos;
 
 import br.com.inventory.mechanicalparts.entities.enums.EnumSexo;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;

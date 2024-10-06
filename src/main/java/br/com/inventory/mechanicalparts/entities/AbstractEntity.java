@@ -1,6 +1,7 @@
 package br.com.inventory.mechanicalparts.entities;
 
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.MappedSuperclass;
+
 import java.io.Serializable;
 
 @MappedSuperclass
