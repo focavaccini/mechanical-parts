@@ -10,4 +10,6 @@ public class AutheticationDetails {
     String token;
 
     String expiredAt;
+
+    String refreshToken;
 }

@@ -4,6 +4,7 @@ import br.com.inventory.mechanicalparts.configurations.AutheticationDetails;
 import br.com.inventory.mechanicalparts.dtos.Login;
 import br.com.inventory.mechanicalparts.entities.User;
 import br.com.inventory.mechanicalparts.services.AuthService;
+import br.com.inventory.mechanicalparts.services.RefreshTokenService;
 import br.com.inventory.mechanicalparts.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +23,9 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private RefreshTokenService refreshTokenService;
+
     @Override
     public AutheticationDetails login(Login login) {
 
@@ -32,9 +36,12 @@ public class AuthServiceImpl implements AuthService {
 
         var user = (User) authenticate.getPrincipal();
 
+        String refreshToken = refreshTokenService.createRefreshToken(user.getId()).getToken();
+
         AutheticationDetails autheticationDetails = new AutheticationDetails();
         autheticationDetails.setToken(tokenService.generateToken(user));
-        autheticationDetails.setExpiredAt(LocalDateTime.now().plusMinutes(30).toString());
+        autheticationDetails.setExpiredAt(LocalDateTime.now().plusMinutes(1).toString());
+        autheticationDetails.setRefreshToken(refreshToken);
 
         return autheticationDetails;
     }
