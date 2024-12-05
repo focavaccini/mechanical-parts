@@ -2,11 +2,11 @@ package br.com.inventory.mechanicalparts.dtos;
 
 import br.com.inventory.mechanicalparts.entities.Professional;
 import br.com.inventory.mechanicalparts.entities.enums.EnumStatusServicePerformed;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -54,9 +54,9 @@ public class ServicePerformedDTO implements Serializable {
     @PreUpdate
     private void preUpdate() {
         int days = this.deliveryDate.compareTo(LocalDate.now());
-        if(days < 0){
+        if (days < 0) {
             this.status = EnumStatusServicePerformed.ATRASADO;
-        }else{
+        } else {
             this.status = EnumStatusServicePerformed.EM_DIA;
         }
     }
@@ -64,9 +64,9 @@ public class ServicePerformedDTO implements Serializable {
     @PrePersist
     private void prePersist() {
         int days = this.deliveryDate.compareTo(LocalDate.now());
-        if(days < 0){
+        if (days < 0) {
             this.status = EnumStatusServicePerformed.ATRASADO;
-        }else{
+        } else {
             this.status = EnumStatusServicePerformed.EM_DIA;
         }
     }

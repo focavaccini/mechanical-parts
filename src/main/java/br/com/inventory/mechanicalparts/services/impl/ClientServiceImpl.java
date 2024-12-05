@@ -6,6 +6,7 @@ import br.com.inventory.mechanicalparts.entities.Address;
 import br.com.inventory.mechanicalparts.entities.Car;
 import br.com.inventory.mechanicalparts.entities.Client;
 import br.com.inventory.mechanicalparts.entities.User;
+import br.com.inventory.mechanicalparts.entities.enums.EnumRole;
 import br.com.inventory.mechanicalparts.exceptions.BadRequestException;
 import br.com.inventory.mechanicalparts.exceptions.ObjectNotFound;
 import br.com.inventory.mechanicalparts.repositories.ClientRepository;
@@ -13,12 +14,12 @@ import br.com.inventory.mechanicalparts.services.AddressService;
 import br.com.inventory.mechanicalparts.services.CarService;
 import br.com.inventory.mechanicalparts.services.ClientService;
 import br.com.inventory.mechanicalparts.services.UserService;
+import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.MessagingException;
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class ClientServiceImpl implements ClientService {
     public Client insert(Client client) {
         Client newClient;
         onPrepareInsertOrUpdate(client);
-        User user = userService.saveUser(client.getEmail());
+        User user = userService.saveUser(client.getEmail(), EnumRole.USER);
         client.setActive(true);
         client.setUser(user);
         client.setRegistrationDate(LocalDateTime.now());

@@ -3,11 +3,11 @@ package br.com.inventory.mechanicalparts.entities;
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
 import br.com.inventory.mechanicalparts.entities.enums.EnumTypeFuel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -25,6 +25,7 @@ public class Car extends AbstractEntity<Long> implements Serializable {
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_car")
+    @SequenceGenerator(name = "id_car", sequenceName = "car_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "model", nullable = false)

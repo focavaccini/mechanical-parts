@@ -1,10 +1,10 @@
 package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 
@@ -20,6 +20,7 @@ public class State extends AbstractEntity<Long> implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_state")
+    @SequenceGenerator(name = "id_state", sequenceName = "state_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name", nullable = false)

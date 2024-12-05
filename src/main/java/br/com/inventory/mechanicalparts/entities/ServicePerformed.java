@@ -4,11 +4,11 @@ import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
 import br.com.inventory.mechanicalparts.entities.enums.EnumStatusPayment;
 import br.com.inventory.mechanicalparts.entities.enums.EnumStatusServicePerformed;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -28,6 +28,7 @@ public class ServicePerformed extends AbstractEntity<Long> implements Serializab
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_service_performed")
+    @SequenceGenerator(name = "id_service_performed", sequenceName = "service_performe_seq", allocationSize = 1)
     private Long id;
 
 //    @Column(name = "value")

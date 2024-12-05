@@ -2,10 +2,10 @@ package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
 import br.com.inventory.mechanicalparts.entities.enums.EnumPaymentForm;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -23,6 +23,7 @@ public class Payment extends AbstractEntity<Long> implements Serializable {
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_payment")
+    @SequenceGenerator(name = "id_payment", sequenceName = "payment_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "payment_form", nullable = false)

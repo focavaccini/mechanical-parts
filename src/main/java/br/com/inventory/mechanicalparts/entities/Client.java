@@ -2,11 +2,11 @@ package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
 import br.com.inventory.mechanicalparts.entities.enums.EnumSexo;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -24,6 +24,7 @@ public class Client extends AbstractEntity<Long> implements Serializable {
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_client")
+    @SequenceGenerator(name = "id_client", sequenceName = "client_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "name", nullable = false)
