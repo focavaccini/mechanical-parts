@@ -26,6 +26,12 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
+    @ExceptionHandler(TokenRefreshException.class)
+    public ResponseEntity<StandardError> tokenRefreshException(TokenRefreshException e, HttpServletRequest request) {
+        StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNAUTHORIZED.value(), "Refresh Token expirou", e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+
     @ExceptionHandler(UniqueException.class)
     public ResponseEntity<StandardError> uniqueException(UniqueException e, HttpServletRequest request) {
         StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Código de barras já existe", e.getMessage(), request.getRequestURI());
