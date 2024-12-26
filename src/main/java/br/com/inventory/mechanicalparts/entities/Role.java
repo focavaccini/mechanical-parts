@@ -4,6 +4,7 @@ import br.com.inventory.mechanicalparts.entities.enums.EnumRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serial;
@@ -14,6 +15,7 @@ import java.util.Collection;
 @Setter
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_role")
 public class Role extends AbstractEntity<Long> implements Serializable {
 
@@ -45,11 +47,11 @@ public class Role extends AbstractEntity<Long> implements Serializable {
         this.name = name;
     }
 
-    public Role(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Role() {
-    }
+//    public Role(Long id, String name) {
+//        this.id = id;
+//        this.name = name;
+//    }
+//
+//    public Role() {
+//    }
 }

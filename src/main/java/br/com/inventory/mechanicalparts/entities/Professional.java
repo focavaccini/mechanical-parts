@@ -3,7 +3,9 @@ package br.com.inventory.mechanicalparts.entities;
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serial;
@@ -13,8 +15,10 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_professional")
+@NoArgsConstructor
 public class Professional extends AbstractEntity<Long>  implements Serializable {
 
     @Serial
