@@ -16,6 +16,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class Configurations {
 
+    private static final String[] AUTH_SWAGGER_LIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-resources/**",
+            "/webjars/**",
+    };
+
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -33,9 +40,10 @@ public class Configurations {
                 .csrf(csrf -> csrf.disable()) // Disable CSRF
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/authentication/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/professional").permitAll()
-                        .requestMatchers("/professional").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+//                        .requestMatchers(HttpMethod.POST, "/professional").permitAll()
+//                        .requestMatchers("/professional").hasRole("ADMIN")
+//                        .requestMatchers(AUTH_SWAGGER_LIST).permitAll()
+//                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

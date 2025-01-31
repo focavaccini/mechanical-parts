@@ -1,10 +1,10 @@
 package br.com.inventory.mechanicalparts.entities;
 
 import br.com.inventory.mechanicalparts.controllers.AbstractEntity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;

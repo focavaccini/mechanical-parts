@@ -40,7 +40,7 @@ public class AuthServiceImpl implements AuthService {
 
         AutheticationDetails autheticationDetails = new AutheticationDetails();
         autheticationDetails.setToken(tokenService.generateToken(user));
-        autheticationDetails.setExpiredAt(LocalDateTime.now().plusMinutes(1).toString());
+        autheticationDetails.setExpiredAt(LocalDateTime.now().plusMinutes(1000).toString());
         autheticationDetails.setRefreshToken(refreshToken);
 
         return autheticationDetails;

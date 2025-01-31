@@ -1,5 +1,6 @@
 package br.com.inventory.mechanicalparts.services.impl;
 
+import br.com.inventory.mechanicalparts.Utils.Util;
 import br.com.inventory.mechanicalparts.entities.RefreshToken;
 import br.com.inventory.mechanicalparts.entities.RefreshTokenRequest;
 import br.com.inventory.mechanicalparts.entities.RefreshTokenResponse;
@@ -44,6 +45,12 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public RefreshToken createRefreshToken(Long userId) {
+        RefreshToken refreshTokenManeged = refreshTokenRepository.findByUserId(userId).orElse(null);
+
+        if (!Util.isEmpty(refreshTokenManeged)) {
+            refreshTokenRepository.delete(refreshTokenManeged);
+        }
+
         RefreshToken refreshToken = new RefreshToken();
 
         refreshToken.setUser(userRepository.findById(userId).orElse(null));
